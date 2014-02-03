@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BathUniApp</string>
+    <string name="full_name">Name:</string>
+    <string name="username">Username:</string>
+    <string-array name="faculty_array">
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>Computer Science</item>
+        <item>Mathematics</item>
+        <item>Pharmacy</item>
+        <item>Physics</item>
+    </string-array>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
