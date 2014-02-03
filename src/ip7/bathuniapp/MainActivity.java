@@ -1,7 +1,6 @@
 package ip7.bathuniapp;
 
 import ip7.bathuniapp.R;
-import android.app.Activity;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -29,7 +28,7 @@ public class MainActivity extends FragmentActivity
 
         nsViewPager.setAdapter(tabsAdapter);
         actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_TABS);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         //add the tabs
         for (String name : tabs) {
