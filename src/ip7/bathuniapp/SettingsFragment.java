@@ -99,6 +99,7 @@ public class SettingsFragment extends Fragment {
     	spinner.setAdapter(adapter);
     }
     
+    // TODO This needs fixing: May break from time to time in different tabs
     @Override
 	public void onDestroyView()
     {
@@ -108,7 +109,7 @@ public class SettingsFragment extends Fragment {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("name", fullNameText.getText().toString());
         editor.putString("username", usernameText.getText().toString());
-        
+
         // Commit changes
         editor.commit();
     }
