@@ -62,10 +62,6 @@ public class SettingsFragment extends Fragment {
             	{
             		setSpinnerContent(view, departmentSpinner, R.array.course_engineering_array);
             	}
-            	else if (parent.getItemAtPosition(pos).equals("Humanities and Social Sciences"))
-            	{
-            		setSpinnerContent(view, departmentSpinner, R.array.course_humanities_array);
-            	}
             	else if (parent.getItemAtPosition(pos).equals("Science"))
             	{
             		setSpinnerContent(view, departmentSpinner, R.array.course_science_array);
@@ -104,9 +100,9 @@ public class SettingsFragment extends Fragment {
     }
     
     // TODO This needs fixing: May break from time to time in different tabs
-  //  @Override
-//	public void onDestroyView()
- //   {
+    @Override
+	public void onDestroyView()
+    {
     	// Save preferences
     	//TODO Save Bus Route and Course
 //        SharedPreferences settings = this.getActivity().getPreferences(0);
@@ -116,5 +112,5 @@ public class SettingsFragment extends Fragment {
 //
 //        // Commit changes
 //        editor.commit();
- //   }
+    }
 }

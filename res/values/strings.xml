@@ -11,6 +11,7 @@
         <item>Engineering</item>
         <item>Humanities and Social Sciences</item>
         <item>Science</item>
+        <item>Management</item>
     </string-array>
     <string-array name="bus_route_array">
         <item>U10</item>
@@ -30,13 +31,6 @@
         <item>Chemical</item>
         <item>Electronic</item>
         <item>Mechanical</item>
-    </string-array>
-    <string-array name="course_humanities_array">
-        <item>Economics</item>
-        <item>Education</item>
-        <item>Health</item>
-        <item>Politics</item>
-        <item>Psycholoty</item>
     </string-array>
     <string-array name="empty_array"></string-array>
     <color name="white">#FFFFFF</color>
