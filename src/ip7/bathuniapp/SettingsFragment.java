@@ -105,12 +105,12 @@ public class SettingsFragment extends Fragment {
     {
     	// Save preferences
     	//TODO Save Bus Route and Course
-        SharedPreferences settings = this.getActivity().getPreferences(0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("name", fullNameText.getText().toString());
-        editor.putString("username", usernameText.getText().toString());
-
-        // Commit changes
-        editor.commit();
+//        SharedPreferences settings = this.getActivity().getPreferences(0);
+//        SharedPreferences.Editor editor = settings.edit();
+//        editor.putString("name", fullNameText.getText().toString());
+//        editor.putString("username", usernameText.getText().toString());
+//
+//        // Commit changes
+//        editor.commit();
     }
 }
