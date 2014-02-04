@@ -4,106 +4,106 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/black">
-	
-    <TableRow 
+
+    <TableRow
         android:id="@+id/trFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-        
-	    <TextView
-	        android:id="@+id/tvFullName"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:gravity="right"
-	        android:layout_weight="1"
-	        android:text="@string/full_name"
-	        android:textSize="24sp" />
-	
-	    <EditText
-	        android:id="@+id/etFullName"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:ems="10"
-	        android:inputType="textPersonName" >
-	
-	        <requestFocus />
-	    </EditText>
-	</TableRow>
-	
-    <TableRow 
+
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/full_name"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etFullName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+    </TableRow>
+
+    <TableRow
         android:id="@+id/trUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-    
-	    <TextView
-	        android:id="@+id/tvUsername"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:gravity="right"
-	        android:layout_weight="1"
-	        android:text="@string/username"
-	        android:textSize="24sp" />
-	
-	    <EditText
-	        android:id="@+id/etUsername"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:ems="10" 
-	        android:inputType="text" >
-	        
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/username"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text" >
+
         </EditText>
     </TableRow>
-    
-    <TableRow 
+
+    <TableRow
         android:id="@+id/trFaculty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-	    
-	    <Spinner
-    		android:id="@+id/spinFaculty"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinFaculty"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </TableRow>
-    
-    <TableRow 
+
+    <TableRow
         android:id="@+id/trDepartment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-	    
-	    <Spinner
-    		android:id="@+id/spinDepartment"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinDepartment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </TableRow>
-    
-    <TableRow 
+
+    <TableRow
         android:id="@+id/trCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-	    
-	    <Spinner
-    		android:id="@+id/spinCourse"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinCourse"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </TableRow>
-    
-    <TableRow 
+
+    <TableRow
         android:id="@+id/trBusRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dip" >
-	    
-	    <Spinner
-    		android:id="@+id/spinBusRoute"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/spinBusRoute"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </TableRow>
 
 
