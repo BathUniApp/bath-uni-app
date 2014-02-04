@@ -13,6 +13,26 @@
         <item>Science</item>
         <item>Management</item>
     </string-array>
+    <string-array name="bus_route_array">
+        <item>U10</item>
+        <item>18</item>
+        <item>U18</item>
+    </string-array>
+    <string-array name="course_science_array">
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>Computer Science</item>
+        <item>Mathematics</item>
+        <item>Pharmacy</item>
+        <item>Physics</item>
+    </string-array>
+    <string-array name="course_engineering_array">
+        <item>Architecture</item>
+        <item>Chemical</item>
+        <item>Electronic</item>
+        <item>Mechanical</item>
+    </string-array>
+    <string-array name="empty_array"></string-array>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 </resources>
