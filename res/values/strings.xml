@@ -35,4 +35,5 @@
     <string-array name="empty_array"></string-array>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="blue">#33B5E5</color>
 </resources>

@@ -9,7 +9,7 @@
         android:id="@+id/trFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
         
 	    <TextView
 	        android:id="@+id/tvFullName"
@@ -36,7 +36,7 @@
         android:id="@+id/trUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
     
 	    <TextView
 	        android:id="@+id/tvUsername"
@@ -58,11 +58,16 @@
         </EditText>
     </TableRow>
     
+    <View 
+        android:layout_width="fill_parent"
+		android:layout_height="2dip"
+		android:background="@color/blue" />
+    
     <TableRow 
         android:id="@+id/trFaculty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
 	    
         <TextView
 	        android:id="@+id/tvFaculty"
@@ -84,7 +89,7 @@
         android:id="@+id/trDepartment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
 	    
         <TextView
 	        android:id="@+id/tvDepartment"
@@ -106,7 +111,7 @@
         android:id="@+id/trCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
 	    
         <TextView
 	        android:id="@+id/tvCourse"
@@ -124,11 +129,16 @@
     		android:layout_weight="1"/>
     </TableRow>
     
+    <View 
+        android:layout_width="fill_parent"
+		android:layout_height="2dip"
+		android:background="@color/blue" />
+    
     <TableRow 
         android:id="@+id/trBusRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dip" >
+        android:padding="10dip" >
 	    
         <TextView
 	        android:id="@+id/tvBusRoute"
