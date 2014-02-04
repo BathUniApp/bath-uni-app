@@ -64,10 +64,20 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 	    
+        <TextView
+	        android:id="@+id/tvFaculty"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:layout_weight="1"
+	        android:text="@string/faculty"
+	        android:textSize="24sp" />
+	    
 	    <Spinner
     		android:id="@+id/spinFaculty"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+    		android:layout_width="0dp"
+    		android:layout_height="wrap_content"
+    		android:layout_weight="1" />
     </TableRow>
     
     <TableRow 
@@ -76,10 +86,20 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 	    
+        <TextView
+	        android:id="@+id/tvDepartment"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:layout_weight="1"
+	        android:text="@string/department"
+	        android:textSize="24sp" />
+	    
 	    <Spinner
     		android:id="@+id/spinDepartment"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+    		android:layout_width="0dp"
+    		android:layout_height="wrap_content" 
+    		android:layout_weight="1" />
     </TableRow>
     
     <TableRow 
@@ -88,10 +108,20 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 	    
+        <TextView
+	        android:id="@+id/tvCourse"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:layout_weight="1"
+	        android:text="@string/course"
+	        android:textSize="24sp" />
+	    
 	    <Spinner
     		android:id="@+id/spinCourse"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+    		android:layout_width="0dp"
+    		android:layout_height="wrap_content" 
+    		android:layout_weight="1"/>
     </TableRow>
     
     <TableRow 
@@ -100,10 +130,20 @@
         android:layout_height="wrap_content"
         android:padding="5dip" >
 	    
+        <TextView
+	        android:id="@+id/tvBusRoute"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:layout_weight="1"
+	        android:text="@string/bus_route"
+	        android:textSize="24sp" />
+	    
 	    <Spinner
     		android:id="@+id/spinBusRoute"
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content" />
+    		android:layout_width="0dp"
+    		android:layout_height="wrap_content" 
+    		android:layout_weight="1"/>
     </TableRow>
 
 
