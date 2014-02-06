@@ -26,31 +26,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
-=======
->>>>>>> 6acc415a042732abd365e3c4346f9e54ff2ebc70
 
 public class ToDoListFragment extends Fragment {
 	
 	// The name of the file to store the to-dos XML in
 	String FILENAME = "todos";
 
-<<<<<<< HEAD
-	private EditText item1;
-	private EditText item1Des;
-	private EditText item1date;
-	private CheckBox item1check;
-	
-	
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	
-    	return  inflater.inflate(R.layout.frag_todolist, container, false);
-=======
 	// Code to run on startup
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -180,7 +161,6 @@ public class ToDoListFragment extends Fragment {
             System.err.println("SAXException");
             saxe.printStackTrace();
         }
->>>>>>> 6acc415a042732abd365e3c4346f9e54ff2ebc70
     }
     
     
