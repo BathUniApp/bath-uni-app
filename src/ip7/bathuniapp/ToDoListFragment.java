@@ -3,6 +3,9 @@ package ip7.bathuniapp;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,7 +34,37 @@ public class ToDoListFragment extends Fragment {
 	
 	// The name of the file to store the to-dos XML in
 	String FILENAME = "todos";
+	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
+	
+	public ArrayList<ListItem> getDateGroup(String mode, Date date) //mode being day or month
+	{
+		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+		for(int i=0; i<todolist.size(); i++)
+		{
+			ListItem temp = todolist.get(i);
+			if(mode.equals("day"))
+			{
+				if(temp.getDate().equals(date))
+				{
+					filtered.add(temp);
+				}
+			}
+			else
+			{
+				if(temp.getDate().getMonth()==(date.getMonth()))
+				{
+					filtered.add(temp);
+				}
+			}
+		}
+		
+		
+		
+		return filtered;
+	}
+	
+	
 	// Code to run on startup
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

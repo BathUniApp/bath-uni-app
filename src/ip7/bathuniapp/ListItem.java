@@ -1,5 +1,7 @@
 package ip7.bathuniapp;
 
+import java.util.Date;
+
 
 public class ListItem 
 
@@ -8,6 +10,9 @@ public class ListItem
 	private int priority = 0;
 	private String text = "";
 	private boolean done = false;
+	private Date date; //String in format DD/MM/YY
+	private String description;
+	
 	
 	
 	public ListItem()
@@ -20,6 +25,26 @@ public class ListItem
 		priority = p;
 		text = t;
 		done = x;
+	}
+	
+	public void setDate(Date d)
+	{
+		date = d;
+	}
+	
+	public Date getDate()
+	{
+		return date;
+	}
+	
+	public String getDescription()
+	{
+		return description;
+	}
+	
+	public void setDescription(String d)
+	{
+		description = d;
 	}
 	
 	public int getPriority()
