@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,26 +38,50 @@ public class ToDoListFragment extends Fragment {
 	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
 	
-	public ArrayList<ListItem> getDateGroup(String mode, Date date) //mode being day or month
+	public ArrayList<ListItem> getDateGroup(String mode, String date) //mode being day or month, date input being DD/MM/YYYY
 	{
 		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+		String[] datesplit = date.split("/");
+		int day = Integer.valueOf(datesplit[0]);
+		int month = Integer.valueOf(datesplit[0]);
+		int year = Integer.valueOf(datesplit[0]);
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month-1); //Calendar uses months with Jan being 0 and Dec being 11
+		cal.set(Calendar.YEAR, year);
+		
 		for(int i=0; i<todolist.size(); i++)
 		{
 			ListItem temp = todolist.get(i);
-			if(mode.equals("day"))
+			GregorianCalendar tempdate = temp.getDateClass();
+			
+			if(mode.equals("Day"))
 			{
-				if(temp.getDate().equals(date))
+				if(day==tempdate.get(Calendar.DAY_OF_MONTH)&&
+						year==tempdate.get(Calendar.YEAR)&&
+						month==tempdate.get(Calendar.MONTH))
 				{
 					filtered.add(temp);
 				}
 			}
-			else
+			if(mode.equals("Month"))
 			{
-				if(temp.getDate().getMonth()==(date.getMonth()))
+				if(year==tempdate.get(Calendar.YEAR)&&
+						month==tempdate.get(Calendar.MONTH))
 				{
 					filtered.add(temp);
 				}
 			}
+			
+			if(mode.equals("Week"))
+			{
+				if(cal.get(Calendar.WEEK_OF_YEAR)==tempdate.get(Calendar.WEEK_OF_YEAR)
+						&&year==tempdate.get(Calendar.YEAR))
+				{
+					filtered.add(temp);
+				}
+			}
+			
 		}
 		
 		

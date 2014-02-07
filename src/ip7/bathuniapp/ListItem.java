@@ -1,6 +1,7 @@
 package ip7.bathuniapp;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 public class ListItem 
@@ -10,7 +11,7 @@ public class ListItem
 	private int priority = 0;
 	private String text = "";
 	private boolean done = false;
-	private Date date; //String in format DD/MM/YY
+	private String date; //String in format DD/MM/YY
 	private String description;
 	
 	
@@ -27,14 +28,27 @@ public class ListItem
 		done = x;
 	}
 	
-	public void setDate(Date d)
+	public void setDate(String d)
 	{
 		date = d;
 	}
 	
-	public Date getDate()
+	public String getDate()
 	{
 		return date;
+	}
+	
+	public GregorianCalendar getDateClass()
+	{
+		String[] datesplit = date.split("/");
+		int day = Integer.valueOf(datesplit[0]);
+		int month = Integer.valueOf(datesplit[0]);
+		int year = Integer.valueOf(datesplit[0]);
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		cal.set(Calendar.MONTH, month-1); //Calendar uses months with Jan being 0 and Dec being 11
+		cal.set(Calendar.YEAR, year);
+		return cal;
 	}
 	
 	public String getDescription()
