@@ -21,11 +21,13 @@ public class ListItem
 		
 	}
 	
-	public ListItem(String t, int p, boolean x)
+	public ListItem(String t, int p, boolean x, String d, String e)
 	{
 		priority = p;
 		text = t;
 		done = x;
+		date = d;
+		description = e;
 	}
 	
 	public void setDate(String d)

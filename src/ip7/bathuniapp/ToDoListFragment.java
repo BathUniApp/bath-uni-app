@@ -38,9 +38,40 @@ public class ToDoListFragment extends Fragment {
 	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
 	
-	public ArrayList<ListItem> getDateGroup(String mode, String date) //mode being day or month, date input being DD/MM/YYYY
+	public void sortByDate() //should sort the todolist by date, is currently not called
 	{
-		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+		
+		for(int j=0; j<todolist.size()-1; j++)
+		{
+			for(int i=0; i<todolist.size()-1; i++)
+			{
+				GregorianCalendar date1 = getCalendarVariable(todolist.get(i).getDate());
+				GregorianCalendar date2= getCalendarVariable(todolist.get(i+1).getDate());
+				if(date1.after(date2))
+				{
+					ListItem temp = todolist.get(i);
+					todolist.set(i, todolist.get(i+1));
+					todolist.set(i+1, temp); //swap the two variables
+				}
+			}
+		}
+	}
+	
+	
+	
+	public void addNewListItem(String t, int p, boolean x, String d, String e)
+	{
+		todolist.add(new ListItem(t, p, x, d, e));
+	}
+	
+	public void removeListItem(int i) //When called this function should already know which item you have
+										//Selected for deleting through the sorted list
+	{
+		todolist.remove(i);
+	}
+	
+	public GregorianCalendar getCalendarVariable(String date)
+	{
 		String[] datesplit = date.split("/");
 		int day = Integer.valueOf(datesplit[0]);
 		int month = Integer.valueOf(datesplit[0]);
@@ -49,6 +80,17 @@ public class ToDoListFragment extends Fragment {
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		cal.set(Calendar.MONTH, month-1); //Calendar uses months with Jan being 0 and Dec being 11
 		cal.set(Calendar.YEAR, year);
+		return cal;
+	}
+	
+	public ArrayList<ListItem> getDateGroup(String mode, String date) //mode being day or month, date input being DD/MM/YYYY
+	{
+		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+		String[] datesplit = date.split("/");
+		int day = Integer.valueOf(datesplit[0]);
+		int month = Integer.valueOf(datesplit[0]);
+		int year = Integer.valueOf(datesplit[0]);
+		GregorianCalendar cal = getCalendarVariable(date);
 		
 		for(int i=0; i<todolist.size(); i++)
 		{
