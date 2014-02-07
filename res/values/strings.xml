@@ -7,16 +7,19 @@
     <string name="department">Department:</string>
     <string name="course">Course:</string>
     <string name="bus_route">Bus Route:</string>
+
     <string-array name="faculty_array">
         <item>Engineering</item>
         <item>Humanities and Social Sciences</item>
         <item>Science</item>
     </string-array>
+
     <string-array name="bus_route_array">
         <item>U10</item>
         <item>18</item>
         <item>U18</item>
     </string-array>
+
     <string-array name="course_science_array">
         <item>Biology</item>
         <item>Chemistry</item>
@@ -25,6 +28,7 @@
         <item>Pharmacy</item>
         <item>Physics</item>
     </string-array>
+
     <string-array name="course_engineering_array">
         <item>Architecture</item>
         <item>Chemical</item>
@@ -38,8 +42,10 @@
         <item>Politics</item>
         <item>Psycholoty</item>
     </string-array>
+
     <string-array name="empty_array"></string-array>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="blue">#33B5E5</color>
+
 </resources>
