@@ -39,6 +39,11 @@ public class ToDoListFragment extends Fragment {
 
 	
 	public void sortByDate() //should sort the todolist by date, is currently not called
+	/* Currently this uses bubblesort but upon reflection using insertion sort should be hugely more effiecent
+	 * because you should only be inserting one object in at a time normally and thus sorting the new
+	 * item straight in would be far more productive, but for now bubble sort is simple
+	 * and quicksort etc is annoying because of the way java works, it isn't really a recurisve language
+	 */
 	{
 		
 		for(int j=0; j<todolist.size()-1; j++)
@@ -61,11 +66,16 @@ public class ToDoListFragment extends Fragment {
 	
 	public void addNewListItem(String t, int p, boolean x, String d, String e)
 	{
-		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //ignore parentID for the time being
+		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //use other function for adding a child
+	}
+	
+	public void addNewChild(String t, int p, boolean x, String d, String e, int pid) //Add child with given parent
+	{
+		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), pid)); //ignore parentID for the time being
 	}
 	
 	
-	public int findFreeID()
+	public int findFreeID() //Finds the first free ID for your new list item
 	{
 		int d = 1;
 		while(true)
@@ -120,7 +130,7 @@ public class ToDoListFragment extends Fragment {
 		return false;
 	}
 	
-	public void removeChildren(int pp)
+	public void removeChildren(int pp) //Contary to current above comments, this will remove all the children with a given parentID pp
 	{
 		for(int i=0; i<todolist.size(); i++)
 		{
@@ -156,6 +166,11 @@ public class ToDoListFragment extends Fragment {
 		for(int i=0; i<todolist.size(); i++)
 		{
 			ListItem temp = todolist.get(i);
+			if(temp.getParentID()!=0) //You will obtain anything with a parent via another method
+			{
+				continue;
+			}
+			
 			GregorianCalendar tempdate = temp.getDateClass();
 			
 			if(mode.equals("Day"))
@@ -192,6 +207,27 @@ public class ToDoListFragment extends Fragment {
 		return filtered;
 	}
 	
+	public ArrayList<ListItem> getSubTasks(int pid)
+	{
+		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+		for(int i=0; i<todolist.size(); i++)
+		{
+			if(todolist.get(i).getParentID()==pid)
+			{
+				filtered.add(todolist.get(i));
+			}
+		}
+		
+		
+		
+		
+		
+		
+		return filtered;
+	}
+	
+	
+	
 	
 	// Code to run on startup
     @Override
@@ -207,7 +243,8 @@ public class ToDoListFragment extends Fragment {
     // Sets some XML
     // This will need to be changed, it just demonstrates the ways of
     // Adding elements and attributes.
-    private void setXML()
+    private void setXML() //Acknowledged this needs to be changed but don't really understand it much, will ask
+    //Tristan who wrote it Monday/Tuesday. Gathering this requires a for loop through my arraylist
     {
         try {
     		// Create a document builder
@@ -303,14 +340,24 @@ public class ToDoListFragment extends Fragment {
          
                     System.out.println("To-Do ID : " + eElement.getAttribute("id"));
                     System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
+                    System.out.println("Priority : " + eElement.getElementsByTagName("priority").item(0).getTextContent());
                     System.out.println("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent());
                     System.out.println("Parent ID : " + eElement.getElementsByTagName("parentid").item(0).getTextContent());
                     System.out.println("Complete : " + eElement.getElementsByTagName("complete").item(0).getTextContent());
                     System.out.println("Date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
                     
                     //Make a new list item and store it in the arraylist
-                    ListItem l = new ListItem();
-                    //(String t, int p, boolean x, String d, String e)
+                    ListItem l = new ListItem(
+                    		eElement.getElementsByTagName("title").item(0).getTextContent(),
+                    		Integer.parseInt(eElement.getElementsByTagName("priority").item(0).getTextContent()),
+                    		Boolean.parseBoolean(eElement.getElementsByTagName("complete").item(0).getTextContent()),
+                    		eElement.getElementsByTagName("date").item(0).getTextContent(),
+                    		eElement.getElementsByTagName("description").item(0).getTextContent(),
+                    		Integer.parseInt(eElement.getAttribute("id")),
+                    		Integer.parseInt(eElement.getElementsByTagName("parentid").item(0).getTextContent())
+                    		);
+                    todolist.add(l); //I assume this XML code, though I'm not completely sure, will be called on startup,
+                    				//So this line and ones above will fill the list
                     
                 }
             }
