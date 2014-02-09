@@ -61,13 +61,74 @@ public class ToDoListFragment extends Fragment {
 	
 	public void addNewListItem(String t, int p, boolean x, String d, String e)
 	{
-		todolist.add(new ListItem(t, p, x, d, e));
+		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //ignore parentID for the time being
 	}
 	
-	public void removeListItem(int i) //When called this function should already know which item you have
-										//Selected for deleting through the sorted list
+	
+	public int findFreeID()
 	{
-		todolist.remove(i);
+		int d = 1;
+		while(true)
+		{
+			for(int i=0; i<todolist.size(); i++)
+			{
+				if(todolist.get(i).getID()==d)
+				{
+					d++;
+					break;
+				}
+			}
+			return d;
+		}
+	}
+	
+	public void removeListItem(int i)  //removes the item with the given ID
+	{
+		if(!hasChildren(i))
+		{
+			int x = todolist.size();
+			for(int j=0; j<x; j++)
+			{
+				if(todolist.get(j).getID()==i)
+				{
+					todolist.remove(j);
+					break;
+				}
+			}
+			if(x==todolist.size())
+			{
+				System.out.println("Failed to remove item"); //shouldn't happen but just in case
+			}
+		}
+		else
+		{
+			System.out.println("Cannot remove thread with children"); //For now at least, later will implement removal of children too 
+			//Also inform the user
+		}
+		
+	}
+	
+	public boolean hasChildren(int pp)
+	{
+		for(int i=0; i<todolist.size(); i++)
+		{
+			if(todolist.get(i).getParentID()==pp)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void removeChildren(int pp)
+	{
+		for(int i=0; i<todolist.size(); i++)
+		{
+			if(todolist.get(i).getParentID()==pp)
+			{
+				todolist.remove(i);
+			}
+		}
 	}
 	
 	public GregorianCalendar getCalendarVariable(String date)
@@ -245,6 +306,12 @@ public class ToDoListFragment extends Fragment {
                     System.out.println("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent());
                     System.out.println("Parent ID : " + eElement.getElementsByTagName("parentid").item(0).getTextContent());
                     System.out.println("Complete : " + eElement.getElementsByTagName("complete").item(0).getTextContent());
+                    System.out.println("Date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
+                    
+                    //Make a new list item and store it in the arraylist
+                    ListItem l = new ListItem();
+                    //(String t, int p, boolean x, String d, String e)
+                    
                 }
             }
             
