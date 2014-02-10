@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.support.v4.app.*;
+import java.util.*;
+import android.view.*;
+import android.widget.*;
 
 
 public class MainActivity extends FragmentActivity
@@ -15,6 +18,10 @@ public class MainActivity extends FragmentActivity
     private ActionBar actionBar;
     private String[] tabs = {"Settings", "Buses", "Classes",
                              "To-Do list", "Maps" };
+
+    // private ListView lv;
+    private ToDoAdapter adapter;
+    private ArrayList<ListItem> fetch = new ArrayList<ListItem>();
 
     /** Called when the activity is first created. */
     @Override
@@ -29,6 +36,18 @@ public class MainActivity extends FragmentActivity
         nsViewPager.setAdapter(tabsAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        // list items
+        ListItem itOne = new ListItem("Item1", "Here goes item one!");
+        ListItem itTwo = new ListItem("Item2", "And there is two!");
+        fetch.add(itOne);
+        fetch.add(itTwo);
+
+        ListView lv = (ListView) findViewById(android.R.id.list);
+        adapter = new ToDoAdapter(this,
+                                  android.R.id.list,
+                                  fetch);
+        lv.setAdapter(adapter);
 
         //add the tabs
         for (String name : tabs) {

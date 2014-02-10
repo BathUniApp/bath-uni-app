@@ -17,7 +17,7 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         case 2:
             return new ClassesFragment();
         case 3:
-            return new ToDoListFragment();
+            return new ToDoList();
         case 4:
             return new MapsFragment();
         }

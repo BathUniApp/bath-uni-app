@@ -33,169 +33,167 @@ import android.view.ViewGroup;
 
 public class ToDoListFragment extends Fragment {
 
->>>>>>> variant B
-
-	// The name of the file to store the to-dos XML in
-	String FILENAME = "todos";
-	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
+    // The name of the file to store the to-dos XML in
+    String FILENAME = "todos";
+    ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
 
-	public void sortByDate() //should sort the todolist by date, is currently not called
-	{
+    public void sortByDate() //should sort the todolist by date, is currently not called
+    {
 
-		for(int j=0; j<todolist.size()-1; j++)
-		{
-			for(int i=0; i<todolist.size()-1; i++)
-			{
-				GregorianCalendar date1 = getCalendarVariable(todolist.get(i).getDate());
-				GregorianCalendar date2= getCalendarVariable(todolist.get(i+1).getDate());
-				if(date1.after(date2))
-				{
-					ListItem temp = todolist.get(i);
-					todolist.set(i, todolist.get(i+1));
-					todolist.set(i+1, temp); //swap the two variables
-				}
-			}
-		}
-	}
+        for(int j=0; j<todolist.size()-1; j++)
+        {
+            for(int i=0; i<todolist.size()-1; i++)
+            {
+                GregorianCalendar date1 = getCalendarVariable(todolist.get(i).getDate());
+                GregorianCalendar date2= getCalendarVariable(todolist.get(i+1).getDate());
+                if(date1.after(date2))
+                {
+                    ListItem temp = todolist.get(i);
+                    todolist.set(i, todolist.get(i+1));
+                    todolist.set(i+1, temp); //swap the two variables
+                }
+            }
+        }
+    }
 
 
 
-	public void addNewListItem(String t, int p, boolean x, String d, String e)
-	{
-		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //ignore parentID for the time being
-	}
+    public void addNewListItem(String t, int p, boolean x, String d, String e)
+    {
+        todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //ignore parentID for the time being
+    }
 
 
-	public int findFreeID()
-	{
-		int d = 1;
-		while(true)
-		{
-			for(int i=0; i<todolist.size(); i++)
-			{
-				if(todolist.get(i).getID()==d)
-				{
-					d++;
-					break;
-				}
-			}
-			return d;
-		}
-	}
+    public int findFreeID()
+    {
+        int d = 1;
+        while(true)
+        {
+            for(int i=0; i<todolist.size(); i++)
+            {
+                if(todolist.get(i).getID()==d)
+                {
+                    d++;
+                    break;
+                }
+            }
+            return d;
+        }
+    }
 
-	public void removeListItem(int i)  //removes the item with the given ID
-	{
-		if(!hasChildren(i))
-		{
-			int x = todolist.size();
-			for(int j=0; j<x; j++)
-			{
-				if(todolist.get(j).getID()==i)
-				{
-					todolist.remove(j);
-					break;
-				}
-			}
-			if(x==todolist.size())
-			{
-				System.out.println("Failed to remove item"); //shouldn't happen but just in case
-			}
-		}
-		else
-		{
-			System.out.println("Cannot remove thread with children"); //For now at least, later will implement removal of children too
-			//Also inform the user
-		}
+    public void removeListItem(int i)  //removes the item with the given ID
+    {
+        if(!hasChildren(i))
+        {
+            int x = todolist.size();
+            for(int j=0; j<x; j++)
+            {
+                if(todolist.get(j).getID()==i)
+                {
+                    todolist.remove(j);
+                    break;
+                }
+            }
+            if(x==todolist.size())
+            {
+                System.out.println("Failed to remove item"); //shouldn't happen but just in case
+            }
+        }
+        else
+        {
+            System.out.println("Cannot remove thread with children"); //For now at least, later will implement removal of children too
+            //Also inform the user
+        }
 
-	}
+    }
 
-	public boolean hasChildren(int pp)
-	{
-		for(int i=0; i<todolist.size(); i++)
-		{
-			if(todolist.get(i).getParentID()==pp)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean hasChildren(int pp)
+    {
+        for(int i=0; i<todolist.size(); i++)
+        {
+            if(todolist.get(i).getParentID()==pp)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public void removeChildren(int pp)
-	{
-		for(int i=0; i<todolist.size(); i++)
-		{
-			if(todolist.get(i).getParentID()==pp)
-			{
-				todolist.remove(i);
-			}
-		}
-	}
+    public void removeChildren(int pp)
+    {
+        for(int i=0; i<todolist.size(); i++)
+        {
+            if(todolist.get(i).getParentID()==pp)
+            {
+                todolist.remove(i);
+            }
+        }
+    }
 
-	public GregorianCalendar getCalendarVariable(String date)
-	{
-		String[] datesplit = date.split("/");
-		int day = Integer.valueOf(datesplit[0]);
-		int month = Integer.valueOf(datesplit[0]);
-		int year = Integer.valueOf(datesplit[0]);
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		cal.set(Calendar.MONTH, month-1); //Calendar uses months with Jan being 0 and Dec being 11
-		cal.set(Calendar.YEAR, year);
-		return cal;
-	}
+    public GregorianCalendar getCalendarVariable(String date)
+    {
+        String[] datesplit = date.split("/");
+        int day = Integer.valueOf(datesplit[0]);
+        int month = Integer.valueOf(datesplit[0]);
+        int year = Integer.valueOf(datesplit[0]);
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.MONTH, month-1); //Calendar uses months with Jan being 0 and Dec being 11
+        cal.set(Calendar.YEAR, year);
+        return cal;
+    }
 
-	public ArrayList<ListItem> getDateGroup(String mode, String date) //mode being day or month, date input being DD/MM/YYYY
-	{
-		ArrayList<ListItem> filtered = new ArrayList<ListItem>();
-		String[] datesplit = date.split("/");
-		int day = Integer.valueOf(datesplit[0]);
-		int month = Integer.valueOf(datesplit[0]);
-		int year = Integer.valueOf(datesplit[0]);
-		GregorianCalendar cal = getCalendarVariable(date);
+    public ArrayList<ListItem> getDateGroup(String mode, String date) //mode being day or month, date input being DD/MM/YYYY
+    {
+        ArrayList<ListItem> filtered = new ArrayList<ListItem>();
+        String[] datesplit = date.split("/");
+        int day = Integer.valueOf(datesplit[0]);
+        int month = Integer.valueOf(datesplit[0]);
+        int year = Integer.valueOf(datesplit[0]);
+        GregorianCalendar cal = getCalendarVariable(date);
 
-		for(int i=0; i<todolist.size(); i++)
-		{
-			ListItem temp = todolist.get(i);
-			GregorianCalendar tempdate = temp.getDateClass();
+        for(int i=0; i<todolist.size(); i++)
+        {
+            ListItem temp = todolist.get(i);
+            GregorianCalendar tempdate = temp.getDateClass();
 
-			if(mode.equals("Day"))
-			{
-				if(day==tempdate.get(Calendar.DAY_OF_MONTH)&&
-						year==tempdate.get(Calendar.YEAR)&&
-						month==tempdate.get(Calendar.MONTH))
-				{
-					filtered.add(temp);
-				}
-			}
-			if(mode.equals("Month"))
-			{
-				if(year==tempdate.get(Calendar.YEAR)&&
-						month==tempdate.get(Calendar.MONTH))
-				{
-					filtered.add(temp);
-				}
-			}
+            if(mode.equals("Day"))
+            {
+                if(day==tempdate.get(Calendar.DAY_OF_MONTH)&&
+                        year==tempdate.get(Calendar.YEAR)&&
+                        month==tempdate.get(Calendar.MONTH))
+                {
+                    filtered.add(temp);
+                }
+            }
+            if(mode.equals("Month"))
+            {
+                if(year==tempdate.get(Calendar.YEAR)&&
+                        month==tempdate.get(Calendar.MONTH))
+                {
+                    filtered.add(temp);
+                }
+            }
 
-			if(mode.equals("Week"))
-			{
-				if(cal.get(Calendar.WEEK_OF_YEAR)==tempdate.get(Calendar.WEEK_OF_YEAR)
-						&&year==tempdate.get(Calendar.YEAR))
-				{
-					filtered.add(temp);
-				}
-			}
+            if(mode.equals("Week"))
+            {
+                if(cal.get(Calendar.WEEK_OF_YEAR)==tempdate.get(Calendar.WEEK_OF_YEAR)
+                        &&year==tempdate.get(Calendar.YEAR))
+                {
+                    filtered.add(temp);
+                }
+            }
 
-		}
-
-
-
-		return filtered;
-	}
+        }
 
 
-	// Code to run on startup
+
+        return filtered;
+    }
+
+
+    // Code to run on startup
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -330,7 +328,7 @@ public class ToDoListFragment extends Fragment {
         } catch (SAXException saxe) {
             System.err.println("SAXException");
             saxe.printStackTrace();
-q        }
+        }
     }
 
 
