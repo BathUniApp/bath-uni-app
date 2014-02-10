@@ -33,7 +33,9 @@ import android.view.ViewGroup;
 
 public class ToDoListFragment extends Fragment {
 
->>>>>>> variant B
+//>>>>>>> variant B
+	// TODO: IDK what ^ is, but it was causing the code not to compile
+	// Anyone know? ~atb
 
 	// The name of the file to store the to-dos XML in
 	String FILENAME = "todos";
@@ -377,7 +379,7 @@ public class ToDoListFragment extends Fragment {
         } catch (SAXException saxe) {
             System.err.println("SAXException");
             saxe.printStackTrace();
-q        }
+        }
     }
 
 
