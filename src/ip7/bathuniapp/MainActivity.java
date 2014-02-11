@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.support.v4.app.*;
+import android.view.View;
 
 
 public class MainActivity extends FragmentActivity
