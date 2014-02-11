@@ -8,11 +8,13 @@ public class ListItem
 
 {
 
+	private int ID;
 	private int priority = 0;
 	private String text = "";
 	private boolean done = false;
 	private String date; //String in format DD/MM/YY
 	private String description;
+	private int parent;
 	
 	
 	
@@ -21,13 +23,15 @@ public class ListItem
 		
 	}
 	
-	public ListItem(String t, int p, boolean x, String d, String e)
+	public ListItem(String t, int p, boolean x, String d, String e, int id, int pid)
 	{
 		priority = p;
 		text = t;
 		done = x;
 		date = d;
 		description = e;
+		ID = id;
+		parent = pid;
 	}
 	
 	public void setDate(String d)
@@ -93,4 +97,23 @@ public class ListItem
 		done = x;
 	}
 	
+	public void setID(int i)
+	{
+		ID = i;
+	}
+	
+	public int getID()
+	{
+		return ID;
+	}
+	
+	public int getParentID()
+	{
+		return parent;
+	}
+	
+	public void setParentID(int p)
+	{
+		parent = p;
+	}
 }

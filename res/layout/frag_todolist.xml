@@ -11,44 +11,53 @@
         android:text="Mode Change"
         android:onClick="changeView" />
 
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="To Do List" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <CheckBox
-            android:id="@+id/item1check"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/item1check"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/item1Date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="DD/MM"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:text="Item 1" />
+
+        </LinearLayout>
 
         <EditText
-            android:id="@+id/item1Date"
-            android:layout_width="0dp"
+            android:id="@+id/item1Des"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="DD/MM"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:text="Item 1 Des" />
 
-        <EditText
-            android:id="@+id/item1"
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:text="Item 1" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/item1Des"
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:text="Item 1 Des" />
+    <Button
+        android:id="@+id/addTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap to add a task."
+        android:onClick="openAddTask" />
+
 </LinearLayout>
