@@ -9,15 +9,25 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_TASKS = "tasks";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_PRIORITY = "priority";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_PARENT_ID = "parent_id";
+    public static final String COLUMN_COMPLETE = "complete";
+    public static final String COLUMN_DATE = "date";
 
     private static final String DATABASE_NAME = "tasks.db";
     private static final int DATABASE_VERSION = 1;
 
     // Database creation sql statement
-    private static final String DATABASE_CREATE = "create table " + TABLE_TASKS
+    private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS
             + "(" + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_NAME + " text not null);";
+            + COLUMN_TITLE + " text not null, " 
+            + COLUMN_PRIORITY + " int, "
+            + COLUMN_DESCRIPTION + " text, "
+            + COLUMN_PARENT_ID + " int, "
+            + COLUMN_COMPLETE + " int, "
+            + COLUMN_DATE + " text);";
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,7 +35,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        database.execSQL(DATABASE_CREATE);
+        database.execSQL(TASK_DATABASE_CREATE);
     }
 
     @Override
