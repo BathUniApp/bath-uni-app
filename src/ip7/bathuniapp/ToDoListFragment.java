@@ -1,48 +1,102 @@
 package ip7.bathuniapp;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Random;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
-public class ToDoListFragment extends Fragment {
+public class ToDoListFragment extends ListFragment implements OnClickListener {
+    // Database of Tasks
+    private TasksDataSource datasource;
+    
+    // ArrayList of ToDos
+    private ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
-	// The name of the file to store the to-dos XML in
-	String FILENAME = "todos";
-	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
+    // Code to run on startup
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+
+        View v = inflater.inflate(R.layout.frag_todolist, container, false);
+
+        // Get the datasource for Tasks
+        datasource = new TasksDataSource(this.getActivity());
+        datasource.open();
+
+        // Return a list of tasks saved in the database
+        List<Task> tasks = datasource.getAllTasks();
+
+        // Use the SimpleCursorAdapter to show the elements in a ListView
+        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this.getActivity(),
+                android.R.layout.simple_list_item_1, tasks);
+        setListAdapter(adapter);
+
+        // Make a button press call onClick in this class instead of MainActivity
+        Button b = (Button) v.findViewById(R.id.addTask);
+        b.setOnClickListener(this);
+
+        return v;
+    }
+    
+    // Handle the user clicking a button
+    public void onClick(View view) {
+        @SuppressWarnings("unchecked")
+        
+        // 
+        ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
+        Task task = null;
+        switch (view.getId()) {
+        case R.id.addTask:
+            // This is just a list of random names for the Task. Obviously this
+            // will eventually come from what the user types in.
+            String[] tasks = new String[] { "Task Test 1", "Task Test 2",
+                    "Task Test 3" };
+            int nextInt = new Random().nextInt(3);
+            // Save the new comment to the database
+            task = datasource.createTask(tasks[nextInt]);
+            adapter.add(task);
+            break;
+        // For when it's useful
+        // case R.id.deleteTask:
+        // if (getListAdapter().getCount() > 0) {
+        // task = (Task) getListAdapter().getItem(0);
+        // datasource.deleteComment(task);
+        // adapter.remove(task);
+        // }
+        // break;
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+      datasource.open();
+      super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+      datasource.close();
+      super.onPause();
+    }
+    
 
 
 	public void sortByDate() //should sort the todolist by date, is currently not called
-	/* Currently this uses bubblesort but upon reflection using insertion sort should be hugely more effiecent
+	/* Currently this uses bubblesort but upon reflection using insertion sort should be hugely more efficient
 	 * because you should only be inserting one object in at a time normally and thus sorting the new
 	 * item straight in would be far more productive, but for now bubble sort is simple
-	 * and quicksort etc is annoying because of the way java works, it isn't really a recurisve language
+	 * and quicksort etc is annoying because of the way java works, it isn't really a recursive language
 	 */
 	{
 		for(int j=0; j<todolist.size()-1; j++)
@@ -222,158 +276,144 @@ public class ToDoListFragment extends Fragment {
 
 		return filtered;
 	}
+    
 
-
-
-
-	// Code to run on startup
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        // Test setting and getting the XML
-        setXML();
-        getXML();
-
-        return  inflater.inflate(R.layout.frag_todolist, container, false);
-    }
-
-    // Sets some XML
-    // This will need to be changed, it just demonstrates the ways of
-    // Adding elements and attributes.
-    private void setXML() //Acknowledged this needs to be changed but don't really understand it much, will ask
-    //Tristan who wrote it Monday/Tuesday. Gathering this requires a for loop through my arraylist
-    {
-        try {
-            // Create a document builder
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-            // Root elements. Note XML requires a single unique root element
-            Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("to-dos");
-            doc.appendChild(rootElement);
-
-            // First To-do element
-            Element todo = doc.createElement("todo");
-            rootElement.appendChild(todo);
-
-            // To make sure to-dos are unique, add an ID
-            todo.setAttribute("id", "1");
-
-            // Title element
-            Element title = doc.createElement("title");
-            title.appendChild(doc.createTextNode("Complete Homework"));
-            todo.appendChild(title);
-
-            // Description element
-            Element description = doc.createElement("description");
-            description.appendChild(doc.createTextNode("Finish that silly android application"));
-            todo.appendChild(description);
-
-            // Parent element
-            Element parent = doc.createElement("parentid");
-            parent.appendChild(doc.createTextNode("12"));
-            todo.appendChild(parent);
-
-            // Complete element
-            Element complete = doc.createElement("complete");
-            complete.appendChild(doc.createTextNode("false"));
-            todo.appendChild(complete);
-
-            // Write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(getActivity().openFileOutput(FILENAME , Context.MODE_PRIVATE));
-            transformer.transform(source, result);
-
-            // Note: This will print to LogCat, not the eclipse console
-            System.out.println("To-Do XML saved");
-
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (TransformerConfigurationException tce) {
-            tce.printStackTrace();
-        } catch (TransformerException te) {
-            te.printStackTrace();
-        }
-    }
+//    // Sets some XML
+//    // This will need to be changed, it just demonstrates the ways of
+//    // Adding elements and attributes.
+//    private void setXML() //Acknowledged this needs to be changed but don't really understand it much, will ask
+//    //Tristan who wrote it Monday/Tuesday. Gathering this requires a for loop through my arraylist
+//    {
+//        try {
+//            // Create a document builder
+//            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+//
+//            // Root elements. Note XML requires a single unique root element
+//            Document doc = docBuilder.newDocument();
+//            Element rootElement = doc.createElement("to-dos");
+//            doc.appendChild(rootElement);
+//
+//            // First To-do element
+//            Element todo = doc.createElement("todo");
+//            rootElement.appendChild(todo);
+//
+//            // To make sure to-dos are unique, add an ID
+//            todo.setAttribute("id", "1");
+//
+//            // Title element
+//            Element title = doc.createElement("title");
+//            title.appendChild(doc.createTextNode("Complete Homework"));
+//            todo.appendChild(title);
+//
+//            // Description element
+//            Element description = doc.createElement("description");
+//            description.appendChild(doc.createTextNode("Finish that silly android application"));
+//            todo.appendChild(description);
+//
+//            // Parent element
+//            Element parent = doc.createElement("parentid");
+//            parent.appendChild(doc.createTextNode("12"));
+//            todo.appendChild(parent);
+//
+//            // Complete element
+//            Element complete = doc.createElement("complete");
+//            complete.appendChild(doc.createTextNode("false"));
+//            todo.appendChild(complete);
+//
+//            // Write the content into xml file
+//            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//            Transformer transformer = transformerFactory.newTransformer();
+//            DOMSource source = new DOMSource(doc);
+//            StreamResult result = new StreamResult(getActivity().openFileOutput(FILENAME , Context.MODE_PRIVATE));
+//            transformer.transform(source, result);
+//
+//            // Note: This will print to LogCat, not the eclipse console
+//            System.out.println("To-Do XML saved");
+//
+//        } catch (ParserConfigurationException pce) {
+//            pce.printStackTrace();
+//        } catch (FileNotFoundException fnfe) {
+//            fnfe.printStackTrace();
+//        } catch (TransformerConfigurationException tce) {
+//            tce.printStackTrace();
+//        } catch (TransformerException te) {
+//            te.printStackTrace();
+//        }
+//    }
 
     // Restores some saved XML
     // Again, this needs to be changed, it's just to demonstrate.
-    private void getXML()
-    {
-        try
-        {
-            // Get the saved XML file
-            // Obviously this will call an error if there is no such file
-            FileInputStream fileis = getActivity().openFileInput(FILENAME);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fileis);
-
-            // Make sure the file is interpreted correctly.
-            doc.getDocumentElement().normalize();
-
-            // To demonstrate accessing elements
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-            // Get all the to-dos into a list
-            NodeList nList = doc.getElementsByTagName("todo");
-
-            System.out.println("----------------------------");
-
-            // Print all the information about the saved todos
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-
-                Node nNode = nList.item(temp);
-                System.out.println("\nCurrent To-do : " + nNode.getNodeName());
-
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element eElement = (Element) nNode;
-
-                    System.out.println("To-Do ID : " + eElement.getAttribute("id"));
-                    System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
-                    System.out.println("Priority : " + eElement.getElementsByTagName("priority").item(0).getTextContent());
-                    System.out.println("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent());
-                    System.out.println("Parent ID : " + eElement.getElementsByTagName("parentid").item(0).getTextContent());
-                    System.out.println("Complete : " + eElement.getElementsByTagName("complete").item(0).getTextContent());
-                    System.out.println("Date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
-
-                    //Make a new list item and store it in the arraylist
-                    ListItem l = new ListItem(
-                    		eElement.getElementsByTagName("title").item(0).getTextContent(),
-                    		Integer.parseInt(eElement.getElementsByTagName("priority").item(0).getTextContent()),
-                    		Boolean.parseBoolean(eElement.getElementsByTagName("complete").item(0).getTextContent()),
-                    		eElement.getElementsByTagName("date").item(0).getTextContent(),
-                    		eElement.getElementsByTagName("description").item(0).getTextContent(),
-                    		Integer.parseInt(eElement.getAttribute("id")),
-                    		Integer.parseInt(eElement.getElementsByTagName("parentid").item(0).getTextContent())
-                    		);
-                    todolist.add(l); //I assume this XML code, though I'm not completely sure, will be called on startup,
-                    				//So this line and ones above will fill the list
-
-                }
-            }
-
-        } catch (java.io.FileNotFoundException fnfe) {
-            System.err.println("File not found exception");
-            fnfe.printStackTrace();
-        } catch (IOException ioe) {
-            System.err.println("IOException");
-            ioe.printStackTrace();
-        } catch (ParserConfigurationException pce) {
-            System.err.println("ParserConfiguratioException");
-            pce.printStackTrace();
-        } catch (SAXException saxe) {
-            System.err.println("SAXException");
-            saxe.printStackTrace();
-        }
-    }
+//    private void getXML()
+//    {
+//        try
+//        {
+//            // Get the saved XML file
+//            // Obviously this will call an error if there is no such file
+//            FileInputStream fileis = getActivity().openFileInput(FILENAME);
+//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//            Document doc = dBuilder.parse(fileis);
+//
+//            // Make sure the file is interpreted correctly.
+//            doc.getDocumentElement().normalize();
+//
+//            // To demonstrate accessing elements
+//            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+//
+//            // Get all the to-dos into a list
+//            NodeList nList = doc.getElementsByTagName("todo");
+//
+//            System.out.println("----------------------------");
+//
+//            // Print all the information about the saved todos
+//            for (int temp = 0; temp < nList.getLength(); temp++) {
+//
+//                Node nNode = nList.item(temp);
+//                System.out.println("\nCurrent To-do : " + nNode.getNodeName());
+//
+//                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+//
+//                    Element eElement = (Element) nNode;
+//
+//                    System.out.println("To-Do ID : " + eElement.getAttribute("id"));
+//                    System.out.println("Title : " + eElement.getElementsByTagName("title").item(0).getTextContent());
+//                    System.out.println("Priority : " + eElement.getElementsByTagName("priority").item(0).getTextContent());
+//                    System.out.println("Description : " + eElement.getElementsByTagName("description").item(0).getTextContent());
+//                    System.out.println("Parent ID : " + eElement.getElementsByTagName("parentid").item(0).getTextContent());
+//                    System.out.println("Complete : " + eElement.getElementsByTagName("complete").item(0).getTextContent());
+//                    System.out.println("Date : " + eElement.getElementsByTagName("date").item(0).getTextContent());
+//
+//                    //Make a new list item and store it in the arraylist
+//                    ListItem l = new ListItem(
+//                    		eElement.getElementsByTagName("title").item(0).getTextContent(),
+//                    		Integer.parseInt(eElement.getElementsByTagName("priority").item(0).getTextContent()),
+//                    		Boolean.parseBoolean(eElement.getElementsByTagName("complete").item(0).getTextContent()),
+//                    		eElement.getElementsByTagName("date").item(0).getTextContent(),
+//                    		eElement.getElementsByTagName("description").item(0).getTextContent(),
+//                    		Integer.parseInt(eElement.getAttribute("id")),
+//                    		Integer.parseInt(eElement.getElementsByTagName("parentid").item(0).getTextContent())
+//                    		);
+//                    todolist.add(l); //I assume this XML code, though I'm not completely sure, will be called on startup,
+//                    				//So this line and ones above will fill the list
+//
+//                }
+//            }
+//
+//        } catch (java.io.FileNotFoundException fnfe) {
+//            System.err.println("File not found exception");
+//            fnfe.printStackTrace();
+//        } catch (IOException ioe) {
+//            System.err.println("IOException");
+//            ioe.printStackTrace();
+//        } catch (ParserConfigurationException pce) {
+//            System.err.println("ParserConfiguratioException");
+//            pce.printStackTrace();
+//        } catch (SAXException saxe) {
+//            System.err.println("SAXException");
+//            saxe.printStackTrace();
+//        }
+//    }
 
 
 
