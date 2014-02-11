@@ -33,10 +33,6 @@ import android.view.ViewGroup;
 
 public class ToDoListFragment extends Fragment {
 
-//>>>>>>> variant B
-	// TODO: IDK what ^ is, but it was causing the code not to compile
-	// Anyone know? ~atb
-
 	// The name of the file to store the to-dos XML in
 	String FILENAME = "todos";
 	ArrayList<ListItem> todolist = new ArrayList<ListItem>();
@@ -49,10 +45,6 @@ public class ToDoListFragment extends Fragment {
 	 * and quicksort etc is annoying because of the way java works, it isn't really a recurisve language
 	 */
 	{
-<<<<<<< HEAD
-=======
-
->>>>>>> 16bbb91f436b5d7b94e835e1f05e9f814ee2dea1
 		for(int j=0; j<todolist.size()-1; j++)
 		{
 			for(int i=0; i<todolist.size()-1; i++)
@@ -68,13 +60,7 @@ public class ToDoListFragment extends Fragment {
 			}
 		}
 	}
-<<<<<<< HEAD
-	
-=======
 
-
-
->>>>>>> 16bbb91f436b5d7b94e835e1f05e9f814ee2dea1
 	public void addNewListItem(String t, int p, boolean x, String d, String e)
 	{
 		todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0)); //use other function for adding a child
