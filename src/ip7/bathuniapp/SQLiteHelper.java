@@ -17,7 +17,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DATE = "date";
 
     private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS

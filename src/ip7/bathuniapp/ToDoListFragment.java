@@ -52,8 +52,6 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     // Handle the user clicking a button
     public void onClick(View view) {
         @SuppressWarnings("unchecked")
-        
-        // 
         ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
         Task task = null;
         switch (view.getId()) {
