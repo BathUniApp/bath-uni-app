@@ -40,7 +40,6 @@ public class ToDoListFragment extends Fragment {
 	
 	public void sortByDate() //should sort the todolist by date, is currently not called
 	{
-		
 		for(int j=0; j<todolist.size()-1; j++)
 		{
 			for(int i=0; i<todolist.size()-1; i++)
@@ -56,8 +55,6 @@ public class ToDoListFragment extends Fragment {
 			}
 		}
 	}
-	
-	
 	
 	public void addNewListItem(String t, int p, boolean x, String d, String e)
 	{
