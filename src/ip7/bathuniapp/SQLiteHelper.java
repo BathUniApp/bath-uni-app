@@ -15,9 +15,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PARENT_ID = "parent_id";
     public static final String COLUMN_COMPLETE = "complete";
     public static final String COLUMN_DATE = "date";
+    
+    public static final String TABLE_EVENTS = "events";
+    public static final String COLUMN_LOCATION = "location";
+    public static final String COLUMN_COURSE = "course";
+    public static final String COLUMN_START = "start";
+    public static final String COLUMN_END = "end";
 
     private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Database creation sql statement
     private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS
@@ -28,6 +34,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_PARENT_ID + " int, "
             + COLUMN_COMPLETE + " int, "
             + COLUMN_DATE + " text);";
+    
+    private static final String EVENT_DATABASE_CREATE = "create table " + TABLE_EVENTS
+            + "(" + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_TITLE + " text not null, " 
+            + COLUMN_DESCRIPTION + " text, "
+            + COLUMN_LOCATION + " text, "
+            + COLUMN_COURSE + " text, "
+            + COLUMN_START + " text, "
+            + COLUMN_END + " text);";
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,6 +51,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(TASK_DATABASE_CREATE);
+        database.execSQL(EVENT_DATABASE_CREATE);
     }
 
     @Override
