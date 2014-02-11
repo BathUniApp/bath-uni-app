@@ -17,11 +17,11 @@ public class ClassesFragment extends ListFragment {
         
         View v = inflater.inflate(R.layout.frag_classes, container, false);
 
-        // Get the datasource for Tasks
+        // Get the datasource for Events
         datasource = new CalendarDataSource(this.getActivity());
         datasource.open();
 
-        // Return a list of tasks saved in the database
+        // Return a list of Events saved in the database
         List<Event> events = datasource.getAllEvents();
 
         // Use the SimpleCursorAdapter to show the elements in a ListView
