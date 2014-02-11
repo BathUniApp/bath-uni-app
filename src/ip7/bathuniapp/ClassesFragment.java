@@ -15,7 +15,7 @@ public class ClassesFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         
-        View v = inflater.inflate(R.layout.frag_todolist, container, false);
+        View v = inflater.inflate(R.layout.frag_classes, container, false);
 
         // Get the datasource for Tasks
         datasource = new CalendarDataSource(this.getActivity());
