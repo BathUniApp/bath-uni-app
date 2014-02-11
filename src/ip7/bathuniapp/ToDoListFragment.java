@@ -53,6 +53,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     public void onClick(View view) {
         @SuppressWarnings("unchecked")
         ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
+        
         Task task = null;
         switch (view.getId()) {
         case R.id.addTask:
@@ -71,6 +72,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         // case R.id.deleteTask:
         // if (getListAdapter().getCount() > 0) {
         // task = (Task) getListAdapter().getItem(0);
+            //ADD IN REMOVE CHILDREN COMMAND
         // datasource.deleteComment(task);
         // adapter.remove(task);
         // }
@@ -92,57 +94,59 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         super.onPause();
     }
 
-    public void sortByDate()
-    /*
-     * Currently this uses bubblesort but upon reflection using insertion sort
-     * should be hugely more efficient because you should only be inserting one
-     * object in at a time normally and thus sorting the new item straight in
-     * would be far more productive, but for now bubble sort is simple and
-     * quicksort etc is annoying because of the way java works, it isn't really
-     * a recursive language
-     */
-    {
-        for (int j = 0; j < todolist.size() - 1; j++) {
-            for (int i = 0; i < todolist.size() - 1; i++) {
-                GregorianCalendar date1 = getCalendarVariable(todolist.get(i)
-                        .getDate());
-                GregorianCalendar date2 = getCalendarVariable(todolist.get(
-                        i + 1).getDate());
-                if (date1.after(date2)) {
-                    // swap the two variables
-                    ListItem temp = todolist.get(i);
-                    todolist.set(i, todolist.get(i + 1));
-                    todolist.set(i + 1, temp);
-                }
-            }
-        }
-    }
+//    public void sortByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
+//    /*
+//     * Currently this uses bubblesort but upon reflection using insertion sort
+//     * should be hugely more efficient because you should only be inserting one
+//     * object in at a time normally and thus sorting the new item straight in
+//     * would be far more productive, but for now bubble sort is simple and
+//     * quicksort etc is annoying because of the way java works, it isn't really
+//     * a recursive language
+//     */
+//    {
+//        for (int j = 0; j < todolist.size() - 1; j++) {
+//            for (int i = 0; i < todolist.size() - 1; i++) {
+//                GregorianCalendar date1 = getCalendarVariable(todolist.get(i)
+//                        .getDate());
+//                GregorianCalendar date2 = getCalendarVariable(todolist.get(
+//                        i + 1).getDate());
+//                if (date1.after(date2)) {
+//                    // swap the two variables
+//                    ListItem temp = todolist.get(i);
+//                    todolist.set(i, todolist.get(i + 1));
+//                    todolist.set(i + 1, temp);
+//                }
+//            }
+//        }
+//    }
+    //Don't know for sure but don't think the code below is needed anymore?
 
-    public void addNewListItem(String t, int p, boolean x, String d, String e) {
-        // use other function for adding a child
-        todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0));
-    }
-
-    // Add child with given parent
-    public void addNewChild(String t, int p, boolean x, String d, String e,
-            int pid) {
-        // ignore parentID for the time being
-        todolist.add(new ListItem(t, p, x, d, e, findFreeID(), pid));
-    }
-
-    // Finds the first free ID for your new list item
-    public int findFreeID() {
-        int d = 1;
-        while (true) {
-            for (int i = 0; i < todolist.size(); i++) {
-                if (todolist.get(i).getID() == d) {
-                    d++;
-                    break;
-                }
-            }
-            return d;
-        }
-    }
+//    public void addNewListItem(String t, int p, boolean x, String d, String e) {
+//        // use other function for adding a child
+//        todolist.add(new ListItem(t, p, x, d, e, findFreeID(), 0));
+//    }
+//
+//    // Add child with given parent
+//    public void addNewChild(String t, int p, boolean x, String d, String e,
+//            int pid) {
+//        // ignore parentID for the time being
+//        todolist.add(new ListItem(t, p, x, d, e, findFreeID(), pid));
+//    }
+//
+//    // Finds the first free ID for your new list item
+//    public int findFreeID() {
+//        int d = 1;
+//        List<Task> tasks = datasource.getAllTasks();
+//        while (true) {
+//            for (int i = 0; i < tasks.size(); i++) {
+//                if (tasks.get(i).getId() == d) {
+//                    d++;
+//                    break;
+//                }
+//            }
+//            return d;
+//        }
+//    }
 
     // removes the item with the given ID
     public void removeListItem(int i) {
@@ -166,30 +170,30 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
 
     }
 
-    public boolean hasChildren(int pp) {
-        for (int i = 0; i < todolist.size(); i++) {
-            if (todolist.get(i).getParentID() == pp) {
+    public boolean hasChildren(int pp) { //Like the only bloody thing I can change right now!
+    	List<Task> tasks = datasource.getAllTasks();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getParent_id() == pp) {
                 return true;
             }
         }
         return false;
     }
 
-    // Contrary to current above comments, this will remove all the children with
-    // a given parentID
-    public void removeChildren(int pp) {
-        for (int i = 0; i < todolist.size(); i++) {
-            if (todolist.get(i).getParentID() == pp) {
-                todolist.remove(i);
+    
+    public void removeChildren(int pp) { //Oh and this I suppose
+    	List<Task> tasks = datasource.getAllTasks();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getParent_id() == pp) {
+               datasource.deleteTask(tasks.get(i));
             }
         }
     }
 
-    public GregorianCalendar getCalendarVariable(String date) {
-        String[] datesplit = date.split("/");
-        int day = Integer.valueOf(datesplit[0]);
-        int month = Integer.valueOf(datesplit[0]);
-        int year = Integer.valueOf(datesplit[0]);
+    public GregorianCalendar getCalendarVariable(Date date) {
+        int day = date.getDay();
+        int month = date.getMonth();
+        int year = date.getYear();
         GregorianCalendar cal = new GregorianCalendar();
         cal.set(Calendar.DAY_OF_MONTH, day);
         // Calendar uses months with Jan being 0 and Dec being 11
@@ -199,22 +203,32 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     }
 
     // mode being day or month, date input being DD/MM/YYYY
-    public ArrayList<ListItem> getDateGroup(String mode, String date) {
-        ArrayList<ListItem> filtered = new ArrayList<ListItem>();
-        String[] datesplit = date.split("/");
-        int day = Integer.valueOf(datesplit[0]);
-        int month = Integer.valueOf(datesplit[0]);
-        int year = Integer.valueOf(datesplit[0]);
+    public ArrayList<Task> getDateGroup(String mode, Date date) 
+    {
+        ArrayList<Task> filtered = new ArrayList<Task>();
+        int day = date.getDay();
+        int month = date.getMonth();
+        int year = date.getYear();
         GregorianCalendar cal = getCalendarVariable(date);
+        List<Task> tasks = datasource.getAllTasks();
 
-        for (int i = 0; i < todolist.size(); i++) {
-            ListItem temp = todolist.get(i);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task temp = tasks.get(i);
             // You will obtain anything with a parent via another method
-            if (temp.getParentID() != 0) {
+            if (temp.getParent_id() != 0) {
                 continue;
             }
 
-            GregorianCalendar tempdate = temp.getDateClass();
+            Date datea = temp.getDate();
+            int day1 = date.getDay();
+            int month1 = date.getMonth();
+            int year1 = date.getYear();
+    		GregorianCalendar tempdate = new GregorianCalendar();
+    		cal.set(Calendar.DAY_OF_MONTH, day1);
+    		cal.set(Calendar.MONTH, month1-1); //Calendar uses months with Jan being 0 and Dec being 11
+    		cal.set(Calendar.YEAR, year1);
+            
+            
 
             if (mode.equals("Day")) {
                 if (day == tempdate.get(Calendar.DAY_OF_MONTH)
@@ -243,11 +257,12 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         return filtered;
     }
 
-    public ArrayList<ListItem> getSubTasks(int pid) {
-        ArrayList<ListItem> filtered = new ArrayList<ListItem>();
-        for (int i = 0; i < todolist.size(); i++) {
-            if (todolist.get(i).getParentID() == pid) {
-                filtered.add(todolist.get(i));
+    public ArrayList<Task> getSubTasks(int pid) {
+    	List<Task> tasks = datasource.getAllTasks();
+        ArrayList<Task> filtered = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getParent_id() == pid) {
+                filtered.add(tasks.get(i));
             }
         }
 
