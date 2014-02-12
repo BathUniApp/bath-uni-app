@@ -102,31 +102,33 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         super.onPause();
     }
 
-//    public void sortByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
-//    /*
-//     * Currently this uses bubblesort but upon reflection using insertion sort
-//     * should be hugely more efficient because you should only be inserting one
-//     * object in at a time normally and thus sorting the new item straight in
-//     * would be far more productive, but for now bubble sort is simple and
-//     * quicksort etc is annoying because of the way java works, it isn't really
-//     * a recursive language
-//     */
-//    {
-//        for (int j = 0; j < todolist.size() - 1; j++) {
-//            for (int i = 0; i < todolist.size() - 1; i++) {
-//                GregorianCalendar date1 = getCalendarVariable(todolist.get(i)
-//                        .getDate());
-//                GregorianCalendar date2 = getCalendarVariable(todolist.get(
-//                        i + 1).getDate());
-//                if (date1.after(date2)) {
-//                    // swap the two variables
-//                    ListItem temp = todolist.get(i);
-//                    todolist.set(i, todolist.get(i + 1));
-//                    todolist.set(i + 1, temp);
-//                }
-//            }
-//        }
-//    }
+    public List<Task> sortedByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
+    /*
+     * Currently this uses bubblesort but upon reflection using insertion sort
+     * should be hugely more efficient because you should only be inserting one
+     * object in at a time normally and thus sorting the new item straight in
+     * would be far more productive, but for now bubble sort is simple and
+     * quicksort etc is annoying because of the way java works, it isn't really
+     * a recursive language
+     */
+    {
+    	ArrayList<Task> tasks = (ArrayList<Task>)datasource.getAllTasks();
+        for (int j = 0; j < tasks.size() - 1; j++) {
+            for (int i = 0; i < tasks.size() - 1; i++) {
+                GregorianCalendar date1 = getCalendarVariable(tasks.get(i)
+                        .getDate());
+                GregorianCalendar date2 = getCalendarVariable(tasks.get(
+                        i + 1).getDate());
+                if (date1.after(date2)) {
+                    // swap the two variables
+                    Task temp = tasks.get(i);
+                    tasks.set(i, tasks.get(i + 1));
+                    tasks.set(i + 1, temp);
+                }
+            }
+        }
+        return (List<Task>)tasks;
+    }
     //Don't know for sure but don't think the code below is needed anymore?
 
 //    public void addNewListItem(String t, int p, boolean x, String d, String e) {
