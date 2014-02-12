@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/modeChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mode Change"
-        android:onClick="changeView" />
+    <!-- This will probably go into the ActionBar -->
+    <!-- <Button -->
+    <!--     android:id="@+id/modeChange" -->
+    <!--     android:layout_width="wrap_content" -->
+    <!--     android:layout_height="wrap_content" -->
+    <!--     android:text="Mode Change" -->
+    <!--     android:onClick="changeView" /> -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,12 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
-
-            <CheckBox
-                android:id="@+id/item1check"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
 
             <EditText
                 android:id="@+id/item1Date"
@@ -41,7 +36,7 @@
                 android:layout_weight="4"
                 android:layout_height="match_parent"
                 android:gravity="left"
-                android:text="Item 1" />
+                android:text="Enter Title" />
 
         </LinearLayout>
 
@@ -49,21 +44,27 @@
             android:id="@+id/item1Des"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:text="Item 1 Des" />
+            android:text="Enter Description" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/addTask"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tap to add a task."
+        android:text="ADD TASK"
         android:onClick="onClick" />
-    
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello World" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No tasks added yet." />
 
 </LinearLayout>

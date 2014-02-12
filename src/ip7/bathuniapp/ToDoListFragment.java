@@ -9,17 +9,21 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 public class ToDoListFragment extends ListFragment implements OnClickListener {
     // Database of Tasks
     private TasksDataSource datasource;
-    
+
     // ArrayList of ToDos
     private ArrayList<ListItem> todolist = new ArrayList<ListItem>();
 
@@ -38,22 +42,26 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         List<Task> tasks = datasource.getAllTasks();
 
         // Use the SimpleCursorAdapter to show the elements in a ListView
-        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this.getActivity(),
-                android.R.layout.simple_list_item_1, tasks);
+        /** At some point this should display check box and the date alongside
+            the title. The layout for this is defined in todo_row.xml, but I'm
+            not sure how to change the current code to do this.  **/
+        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this.getActivity(), android.R.layout.simple_list_item_1, tasks);
         setListAdapter(adapter);
 
         // Make a button press call onClick in this class instead of MainActivity
         Button b = (Button) v.findViewById(R.id.addTask);
         b.setOnClickListener(this);
 
+        // add options menu to actionbar
+        // setHasOptionsMenu(true);
         return v;
     }
-    
+
     // Handle the user clicking a button
     public void onClick(View view) {
         @SuppressWarnings("unchecked")
         ArrayAdapter<Task> adapter = (ArrayAdapter<Task>) getListAdapter();
-        
+
         Task task = null;
         switch (view.getId()) {
         case R.id.addTask:
@@ -67,7 +75,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
             task = datasource.createTask(tasks[nextInt], 0, "", 0, false, new Date());
             adapter.add(task);
             break;
-            
+
         // For when it's useful
         // case R.id.deleteTask:
         // if (getListAdapter().getCount() > 0) {
@@ -77,7 +85,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         // adapter.remove(task);
         // }
         // break;
-            
+
         }
         adapter.notifyDataSetChanged();
     }
@@ -180,7 +188,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         return false;
     }
 
-    
+
     public void removeChildren(int pp) { //Oh and this I suppose
     	List<Task> tasks = datasource.getAllTasks();
         for (int i = 0; i < tasks.size(); i++) {
@@ -203,7 +211,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     }
 
     // mode being day or month, date input being DD/MM/YYYY
-    public ArrayList<Task> getDateGroup(String mode, Date date) 
+    public ArrayList<Task> getDateGroup(String mode, Date date)
     {
         ArrayList<Task> filtered = new ArrayList<Task>();
         int day = date.getDay();
@@ -227,8 +235,8 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     		cal.set(Calendar.DAY_OF_MONTH, day1);
     		cal.set(Calendar.MONTH, month1-1); //Calendar uses months with Jan being 0 and Dec being 11
     		cal.set(Calendar.YEAR, year1);
-            
-            
+
+
 
             if (mode.equals("Day")) {
                 if (day == tempdate.get(Calendar.DAY_OF_MONTH)
@@ -269,7 +277,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         return filtered;
     }
 
-    public void changeView(View view) {
+    public void changeView() {
         // Do something in response to button
     }
 
@@ -277,7 +285,22 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         // implement something maybe onTextChanged()
     }
 
-    public void openAddTask() {
-    }
+    // @Override
+    // public boolean onCreateOptionsMenu(Menu menu) {
+    //     MenuInflater inflater = getMenuInflater();
+    //     inflater.inflate(R.menu.todo_actions, menu);
+    //     return super.onCreateOptionsMenu(menu);
+    // }
+
+    // @Override
+    // public boolean onOptionsItemSelected(MenuItem item) {
+    //     switch (item.getItemId()) {
+    //     case R.id.action_change_view:
+    //         changeView();
+    //         return true;
+    //     default:
+    //         return super.onOptionsItemSelected(item);
+    //     }
+    // }
 
 }
