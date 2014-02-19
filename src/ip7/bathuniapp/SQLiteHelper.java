@@ -21,9 +21,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COURSE = "course";
     public static final String COLUMN_START = "start";
     public static final String COLUMN_END = "end";
+    
+    public static final String TABLE_BUSES = "buses";
+    public static final String COLUMN_ROUTE = "route";
+    public static final String COLUMN_DAY = "day";
+    public static final String COLUMN_RUN_NUMBER = "run_number";
+    public static final String COLUMN_STOP_NUMBER = "stop_number";
+    public static final String COLUMN_TIME = "time";
 
     private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 7;
 
     // Database creation sql statement
     private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS
@@ -43,6 +50,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_COURSE + " text, "
             + COLUMN_START + " text, "
             + COLUMN_END + " text);";
+    
+    private static final String BUSES_DATABASE_CREATE = "create table " + TABLE_BUSES
+            + "(" + COLUMN_ID + " integer primary key autoincrement, "
+            + COLUMN_ROUTE + " text not null, "
+            + COLUMN_DAY + " text not null, "
+            + COLUMN_RUN_NUMBER + " int, "
+            + COLUMN_STOP_NUMBER + " int, "
+            + COLUMN_TIME + " int);";
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -52,6 +67,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(TASK_DATABASE_CREATE);
         database.execSQL(EVENT_DATABASE_CREATE);
+        database.execSQL(BUSES_DATABASE_CREATE);
     }
 
     @Override
@@ -60,6 +76,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSES);
         onCreate(db);
     }
 
