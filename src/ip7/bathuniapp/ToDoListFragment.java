@@ -9,14 +9,10 @@ import java.util.Random;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
