@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 public class BusesFragment extends Fragment {
     
-    ArrayList<E> busTimes = new ArrayList<E>();
+    ArrayList<BusRoute> busTimes = new ArrayList<BusRoute>();
     
     private String[] routes = { "U18" };
     private String[] days = { "M-F Term" };
