@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class ToDoListFragment extends ListFragment implements OnClickListener {
     // Database of Tasks
