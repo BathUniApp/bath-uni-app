@@ -61,6 +61,116 @@ public class BusesFragment extends Fragment {
             myRoute.addStop(stopName, times);
             allRoutes.put("U18MTF", myRoute);
         }
+        
+        BusRoute myRoute2 = new BusRoute("U18", "SAT");
+        for (String stopName: offset.keySet()) {
+            int j = offset.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            
+            for(int i = 0; i < 40; i++) {
+                times.add(465 + i * 20 + j);
+            }
+            times.add(1300 + j);
+            times.add(1315 + j);
+            for(int i = 0; i < 18; i++){
+                times.add(1315 + i * 20 + j);
+            }
+            myRoute2.addStop(stopName, times);
+            allRoutes.put("U18SAT", myRoute2);
+        }
+        
+        BusRoute myRoute3 = new BusRoute("U18", "SUN");
+        for (String stopName: offset.keySet()) {
+            int j = offset.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            
+            for(int i = 0; i < 40; i++) {
+                times.add(525 + i * 20 + j);
+            }
+            times.add(1300 + j);
+            times.add(1315 + j);
+            for(int i = 0; i < 9; i++){
+                times.add(1315 + i * 20 + j);
+            }
+            myRoute3.addStop(stopName, times);
+            allRoutes.put("U18SUN", myRoute3);
+        }
+        
+        BusRoute xroute1 = new BusRoute("X18", "MTF");
+        
+        Map<String, Integer> offset3 = new HashMap<String, Integer>();
+        offset3.put("Lower Oldfield Park", 0);
+        offset3.put("Bathwick Hill", 13);
+        offset3.put("University Of Bath", 18);
+        
+        for (String stopName: offset3.keySet()) {
+            int j = offset3.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            
+            for(int i = 0; i < 5; i++) {
+                times.add(460 + i * 15 + j);
+            }
+            for(int i = 0; i < 28; i++) {
+                times.add(555 + i * 20 + j);
+            }
+            xroute1.addStop(stopName, times);
+            allRoutes.put("X18MTF", xroute1);
+        }
+        
+        
+        
+        BusRoute nextRoute = new BusRoute("18", "MTF");
+        Map<String, Integer> offset2 = new HashMap<String, Integer>();
+        offset2.put("University Of Bath", 0);
+        offset2.put("Dorchester Street (1)", 13);
+        offset2.put("Oldfield Park", 24);
+        offset2.put("Dorchester Street (2)", 32);
+        offset2.put("University of Bath", 50);
+        
+        for (String stopName: offset2.keySet()) {
+            int j = offset2.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            //Very approximate times
+            
+            for(int i = 0; i < 140; i++) {
+                times.add(409 + i * 6 + j);
+            }
+            for(int i = 0; i < 31; i++){
+                times.add(1170 + i * 15 + j);
+            }
+            myRoute.addStop(stopName, times);
+            allRoutes.put("18MTF", nextRoute);
+        }
+        
+        BusRoute Route218 = new BusRoute("18", "SAT");
+        
+        for (String stopName: offset2.keySet()) {
+            int j = offset2.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            //Very approximate times
+            
+            for(int i = 0; i < 61; i++) {
+                times.add(240 + i * 20 + j);
+            }
+            myRoute.addStop(stopName, times);
+            allRoutes.put("18SAT", Route218);
+        }
+        
+        BusRoute Route318 = new BusRoute("18", "SUN");
+        
+        for (String stopName: offset2.keySet()) {
+            int j = offset2.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            //Very approximate times
+            
+            for(int i = 0; i < 30; i++) {
+                times.add(310 + i * 30 + j);
+            }
+            myRoute.addStop(stopName, times);
+            allRoutes.put("18SUN", Route318);
+        }
+        
+        
     }
     
     public String timeToString(int time) {
