@@ -138,7 +138,7 @@ public class BusesFragment extends Fragment {
             for(int i = 0; i < 31; i++){
                 times.add(1170 + i * 15 + j);
             }
-            myRoute.addStop(stopName, times);
+            nextRoute.addStop(stopName, times);
             allRoutes.put("18MTF", nextRoute);
         }
         
@@ -152,7 +152,7 @@ public class BusesFragment extends Fragment {
             for(int i = 0; i < 61; i++) {
                 times.add(240 + i * 20 + j);
             }
-            myRoute.addStop(stopName, times);
+            Route218.addStop(stopName, times);
             allRoutes.put("18SAT", Route218);
         }
         
@@ -166,10 +166,48 @@ public class BusesFragment extends Fragment {
             for(int i = 0; i < 30; i++) {
                 times.add(310 + i * 30 + j);
             }
-            myRoute.addStop(stopName, times);
+            Route318.addStop(stopName, times);
             allRoutes.put("18SUN", Route318);
         }
         
+        BusRoute Route10 = new BusRoute("U10", "MTF");
+        
+        Map<String, Integer> offset4 = new HashMap<String, Integer>(); //35
+        offset4.put("Kingsway Post Office", 0);
+        offset4.put("Moorland Road", 7);
+        offset4.put("Lower Oldfield Park", 12);
+        offset4.put("St Marys Church", 22);
+        offset4.put("Youth Hostel", 27);
+        offset4.put("University of Bath", 33);
+        
+        for (String stopName: offset4.keySet()) {
+            int j = offset4.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            //Very approximate times
+            
+            for(int i = 0; i < 8; i++) {
+                times.add(455 + i * 30 + j);
+            }
+            times.add(670 + j);
+            
+            for(int i = 0; i < 9; i++) {
+                times.add(702 + i * 30 + j);
+            }
+            
+            times.add(944 + j);
+            times.add(983 + j);
+            times.add(1018 + j);
+            times.add(1058 + j);
+            times.add(1098 + j);
+            times.add(1138 + j);
+            times.add(1182 + j);
+            times.add(1242 + j);
+            times.add(1302 + j);
+            times.add(1362 + j);
+            
+            Route10.addStop(stopName, times);
+            allRoutes.put("U10MTF", Route10);
+        }
         
     }
     
