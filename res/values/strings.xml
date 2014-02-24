@@ -43,6 +43,14 @@
         <item>Psycholoty</item>
     </string-array>
 
+    <string-array name="u10_stops">
+        <item>Southdown</item>
+        <item>Oldfield Park</item>
+        <item>Bus Station</item>
+        <item>Bathwick Hill</item>
+        <item>University</item>
+    </string-array>
+
     <string-array name="empty_array"></string-array>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
