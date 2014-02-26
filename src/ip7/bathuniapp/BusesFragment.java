@@ -9,13 +9,12 @@ import java.util.GregorianCalendar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
-import android.widget.TextView;
-import android.widget.GridView;
 import android.widget.*;
 
-public class BusesFragment extends ListFragment {
+public class BusesFragment extends Fragment {
 
     private static Map<String, BusRoute> allRoutes = new HashMap<String, BusRoute>();
 
@@ -24,17 +23,6 @@ public class BusesFragment extends ListFragment {
         View v = inflater.inflate(R.layout.frag_buses, container, false);
 
         fillBusRoutes();
-
-        // Example code for accessing all bus times for a stop.
-        ArrayList<Integer> returnedTimes = allRoutes.get("U18MTF").getAllTimes("University of Bath");
-        for (Integer time: returnedTimes){
-            System.out.println(timeToString(time));
-        }
-
-        String[] testArray = {"3593", "5393", "0351"};
-        ArrayAdapter aa = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, testArray);
-        // ListView timetableList = (ListView) findViewById(R.id.list);
-        setListAdapter(aa);
 
         // Example code for accessing the next bus time
         // System.out.println(timeToString(getCurrentTime()));
@@ -45,7 +33,47 @@ public class BusesFragment extends ListFragment {
         nextTime1.setText(t1);
         // how to access the next two times?
 
+        // the array of all the times from a chosen busstop (or so it should be)
+        ArrayList<String> busTimesArray = new ArrayList<String>();
+
+        // Example code for accessing all bus times for a stop.  ***
+        // This seem to get ALL the times, not just the times from one
+        // bus stop *** unless the bus does come every 5 min, all day?
+        ArrayList<Integer> returnedTimes = allRoutes.get("U18MTF").getAllTimes("University of Bath");
+        for (Integer time: returnedTimes){
+            busTimesArray.add(timeToString(time));
+        }
+
+        // add rows to the bus times table:
+        TableLayout table = (TableLayout) v.findViewById(R.id.times_table);
+
+        // how to add times to the timetable. The bus stops should
+        // obviously come from whatever route is selected, rather than
+        // being entered manually.
+        fillTimeTable("Random Name", table, busTimesArray);
+        fillTimeTable("Second Stop", table, busTimesArray);
+
         return v;
+    }
+
+    public void fillTimeTable(String stopName, TableLayout t, ArrayList<String> timesArray){
+        TableRow row = new TableRow(this.getActivity());
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        row.setLayoutParams(params);
+
+        TextView stop = new TextView(this.getActivity());
+        stop.setText(stopName);
+        stop.setPadding(10, 5, 10, 5);
+        row.addView(stop);
+
+        for (String str : timesArray) {
+            TextView time = new TextView(getActivity());
+            time.setText(str);
+            time.setPadding(10, 5, 10, 5);
+            row.addView(time);
+        }
+
+        t.addView(row);
     }
 
     public void fillBusRoutes() {

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
     a:orientation="vertical"
     a:layout_width="match_parent"
-    a:layout_height="match_parent"
-    a:background="@drawable/cat_pokoachondria">
+    a:layout_height="match_parent" >
 
     <LinearLayout
         a:orientation="horizontal"
@@ -82,22 +81,21 @@
             a:text="2222" />
     </LinearLayout>
 
-    <!-- keeps the timetable -->
-    <LinearLayout
+    <ScrollView
         a:layout_width="match_parent"
-        a:layout_height="wrap_content"
-        a:orientation="vertical" >
+        a:layout_height="wrap_content" >
 
-        <ListView
-            a:id="@android:id/list"
+        <HorizontalScrollView
             a:layout_width="match_parent"
-            a:layout_height="wrap_content" />
-        <TextView
-            a:id="@android:id/empty"
-            a:layout_width="match_parent"
-            a:layout_height="wrap_content" />
+            a:layout_height="wrap_content" >
 
-    </LinearLayout>
+            <TableLayout
+                a:id="@+id/times_table"
+                a:layout_width="match_parent"
+                a:layout_height="wrap_content" >
+            </TableLayout>
 
+        </HorizontalScrollView>
+    </ScrollView>
 
 </LinearLayout>
