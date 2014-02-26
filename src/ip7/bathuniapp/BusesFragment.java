@@ -261,5 +261,7 @@ public class BusesFragment extends Fragment {
         Calendar calendar = GregorianCalendar.getInstance();
         return calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
     }
+    
+    
 
 }
