@@ -262,6 +262,11 @@ public class BusesFragment extends Fragment {
         return calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
     }
     
+    public ArrayList<Integer> changeBusRoute(String route, String s)
+    {
+    	BusRoute br = allRoutes.get(route);
+    	return br.getAllTimes(s);
+    }
     
 
 }
