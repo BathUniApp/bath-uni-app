@@ -13,6 +13,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.os.Bundle;
 import android.widget.*;
+import android.net.Uri;
+import android.content.Intent;
 
 public class BusesFragment extends Fragment {
 
@@ -261,7 +263,6 @@ public class BusesFragment extends Fragment {
         Calendar calendar = GregorianCalendar.getInstance();
         return calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
     }
-    
-    
+
 
 }
