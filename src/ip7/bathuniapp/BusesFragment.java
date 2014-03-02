@@ -19,6 +19,8 @@ import android.content.Intent;
 public class BusesFragment extends Fragment {
 
     private static Map<String, BusRoute> allRoutes = new HashMap<String, BusRoute>();
+    private Spinner route;
+    private Spinner stop;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +57,10 @@ public class BusesFragment extends Fragment {
         fillTimeTable("Random Name", table, busTimesArray);
         fillTimeTable("Second Stop", table, busTimesArray);
 
+        View view = inflater.inflate(R.layout.frag_buses, container, false);
+        route = (Spinner) view.findViewById(R.id.route_spinner);
+        stop = (Spinner) view.findViewById(R.id.busstop_spinner);
+        
         return v;
     }
 
