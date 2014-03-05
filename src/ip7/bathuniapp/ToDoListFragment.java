@@ -98,10 +98,10 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         datasource.close();
         super.onPause();
     }
-    
-    
+
+
     /*
-     *  Alex's code begins here 
+     *  Alex's code begins here
      */
 
     public List<Task> sortedByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
