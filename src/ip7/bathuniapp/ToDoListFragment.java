@@ -1,9 +1,9 @@
 package ip7.bathuniapp;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+//import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +15,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 public class ToDoListFragment extends ListFragment implements OnClickListener {
     // Database of Tasks
@@ -104,33 +103,33 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
      *  Alex's code begins here
      */
 
-    public List<Task> sortedByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
-    /*
-     * Currently this uses bubblesort but upon reflection using insertion sort
-     * should be hugely more efficient because you should only be inserting one
-     * object in at a time normally and thus sorting the new item straight in
-     * would be far more productive, but for now bubble sort is simple and
-     * quicksort etc is annoying because of the way java works, it isn't really
-     * a recursive language
-     */
-    {
-    	ArrayList<Task> tasks = (ArrayList<Task>)datasource.getAllTasks();
-        for (int j = 0; j < tasks.size() - 1; j++) {
-            for (int i = 0; i < tasks.size() - 1; i++) {
-                GregorianCalendar date1 = getCalendarVariable(tasks.get(i)
-                        .getDate());
-                GregorianCalendar date2 = getCalendarVariable(tasks.get(
-                        i + 1).getDate());
-                if (date1.after(date2)) {
-                    // swap the two variables
-                    Task temp = tasks.get(i);
-                    tasks.set(i, tasks.get(i + 1));
-                    tasks.set(i + 1, temp);
-                }
-            }
-        }
-        return (List<Task>)tasks;
-    }
+//    public List<Task> sortedByDate() ///Function did exist but surely SQL supportd ORDER BY somewhere, by date, making this redudant
+//    /*
+//     * Currently this uses bubblesort but upon reflection using insertion sort
+//     * should be hugely more efficient because you should only be inserting one
+//     * object in at a time normally and thus sorting the new item straight in
+//     * would be far more productive, but for now bubble sort is simple and
+//     * quicksort etc is annoying because of the way java works, it isn't really
+//     * a recursive language
+//     */
+//    {
+//    	ArrayList<Task> tasks = (ArrayList<Task>)datasource.getAllTasks();
+//        for (int j = 0; j < tasks.size() - 1; j++) {
+//            for (int i = 0; i < tasks.size() - 1; i++) {
+//                GregorianCalendar date1 = getCalendarVariable(tasks.get(i)
+//                        .getDate());
+//                GregorianCalendar date2 = getCalendarVariable(tasks.get(
+//                        i + 1).getDate());
+//                if (date1.after(date2)) {
+//                    // swap the two variables
+//                    Task temp = tasks.get(i);
+//                    tasks.set(i, tasks.get(i + 1));
+//                    tasks.set(i + 1, temp);
+//                }
+//            }
+//        }
+//        return (List<Task>)tasks;
+//    }
     //Don't know for sure but don't think the code below is needed anymore?
 
 //    public void addNewListItem(String t, int p, boolean x, String d, String e) {
@@ -202,72 +201,72 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         }
     }
 
-    public GregorianCalendar getCalendarVariable(Date date) {
-        int day = date.getDay();
-        int month = date.getMonth();
-        int year = date.getYear();
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        // Calendar uses months with Jan being 0 and Dec being 11
-        cal.set(Calendar.MONTH, month - 1);
-        cal.set(Calendar.YEAR, year);
-        return cal;
-    }
+//    public GregorianCalendar getCalendarVariable(Date date) {
+//        int day = date.getDay();
+//        int month = date.getMonth();
+//        int year = date.getYear();
+//        GregorianCalendar cal = new GregorianCalendar();
+//        cal.set(Calendar.DAY_OF_MONTH, day);
+//        // Calendar uses months with Jan being 0 and Dec being 11
+//        cal.set(Calendar.MONTH, month - 1);
+//        cal.set(Calendar.YEAR, year);
+//        return cal;
+//    }
 
-    // mode being day or month, date input being DD/MM/YYYY
-    public ArrayList<Task> getDateGroup(String mode, Date date)
-    {
-        ArrayList<Task> filtered = new ArrayList<Task>();
-        int day = date.getDay();
-        int month = date.getMonth();
-        int year = date.getYear();
-        GregorianCalendar cal = getCalendarVariable(date);
-        List<Task> tasks = datasource.getAllTasks();
+//    // mode being day or month, date input being DD/MM/YYYY
+//    public ArrayList<Task> getDateGroup(String mode, Date date)
+//    {
+//        ArrayList<Task> filtered = new ArrayList<Task>();
+//        int day = date.getDay();
+//        int month = date.getMonth();
+//        int year = date.getYear();
+//        GregorianCalendar cal = getCalendarVariable(date);
+//        List<Task> tasks = datasource.getAllTasks();
+//
+//        for (int i = 0; i < tasks.size(); i++) {
+//            Task temp = tasks.get(i);
+//            // You will obtain anything with a parent via another method
+//            if (temp.getParent_id() != 0) {
+//                continue;
+//            }
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task temp = tasks.get(i);
-            // You will obtain anything with a parent via another method
-            if (temp.getParent_id() != 0) {
-                continue;
-            }
-
-            Date datea = temp.getDate();
-            int day1 = date.getDay();
-            int month1 = date.getMonth();
-            int year1 = date.getYear();
-    		GregorianCalendar tempdate = new GregorianCalendar();
-    		cal.set(Calendar.DAY_OF_MONTH, day1);
-    		cal.set(Calendar.MONTH, month1-1); //Calendar uses months with Jan being 0 and Dec being 11
-    		cal.set(Calendar.YEAR, year1);
+//            Date datea = temp.getDate();
+//            int day1 = date.getDay();
+//            int month1 = date.getMonth();
+//            int year1 = date.getYear();
+//    		GregorianCalendar tempdate = new GregorianCalendar();
+//    		cal.set(Calendar.DAY_OF_MONTH, day1);
+//    		cal.set(Calendar.MONTH, month1-1); //Calendar uses months with Jan being 0 and Dec being 11
+//    		cal.set(Calendar.YEAR, year1);
 
 
 
-            if (mode.equals("Day")) {
-                if (day == tempdate.get(Calendar.DAY_OF_MONTH)
-                        && year == tempdate.get(Calendar.YEAR)
-                        && month == tempdate.get(Calendar.MONTH)) {
-                    filtered.add(temp);
-                }
-            }
-            if (mode.equals("Month")) {
-                if (year == tempdate.get(Calendar.YEAR)
-                        && month == tempdate.get(Calendar.MONTH)) {
-                    filtered.add(temp);
-                }
-            }
-
-            if (mode.equals("Week")) {
-                if (cal.get(Calendar.WEEK_OF_YEAR) == tempdate
-                        .get(Calendar.WEEK_OF_YEAR)
-                        && year == tempdate.get(Calendar.YEAR)) {
-                    filtered.add(temp);
-                }
-            }
-
-        }
-
-        return filtered;
-    }
+//            if (mode.equals("Day")) {
+//                if (day == tempdate.get(Calendar.DAY_OF_MONTH)
+//                        && year == tempdate.get(Calendar.YEAR)
+//                        && month == tempdate.get(Calendar.MONTH)) {
+//                    filtered.add(temp);
+//                }
+//            }
+//            if (mode.equals("Month")) {
+//                if (year == tempdate.get(Calendar.YEAR)
+//                        && month == tempdate.get(Calendar.MONTH)) {
+//                    filtered.add(temp);
+//                }
+//            }
+//
+//            if (mode.equals("Week")) {
+//                if (cal.get(Calendar.WEEK_OF_YEAR) == tempdate
+//                        .get(Calendar.WEEK_OF_YEAR)
+//                        && year == tempdate.get(Calendar.YEAR)) {
+//                    filtered.add(temp);
+//                }
+//            }
+//
+//        }
+//
+//        return filtered;
+//    }
 
     public ArrayList<Task> getSubTasks(int pid) {
     	List<Task> tasks = datasource.getAllTasks();
