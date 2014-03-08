@@ -49,38 +49,44 @@ public class BusesFragment extends Fragment {
 
         // add rows to the bus times table:
         TableLayout table = (TableLayout) v.findViewById(R.id.times_table);
+        TableLayout times = (TableLayout) v.findViewById(R.id.times);
 
         // how to add times to the timetable. The bus stops should
         // obviously come from whatever route is selected, rather than
         // being entered manually.
-        fillTimeTable("Random Name", table, busTimesArray);
-        fillTimeTable("Second Stop", table, busTimesArray);
+        fillTimeTable("Random Name", table, times, busTimesArray);
+        fillTimeTable("Second Stop", table, times, busTimesArray);
 
         View view = inflater.inflate(R.layout.frag_buses, container, false);
         route = (Spinner) view.findViewById(R.id.route_spinner);
         stop = (Spinner) view.findViewById(R.id.busstop_spinner);
-        
+
         return v;
     }
 
-    public void fillTimeTable(String stopName, TableLayout t, ArrayList<String> timesArray){
+    public void fillTimeTable(String stopName, TableLayout table, TableLayout time, ArrayList<String> timesArray){
         TableRow row = new TableRow(this.getActivity());
-        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
         row.setLayoutParams(params);
+
+        TableRow r2 = new TableRow(this.getActivity());
+        TableRow.LayoutParams p2 = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
+        r2.setLayoutParams(p2);
 
         TextView stop = new TextView(this.getActivity());
         stop.setText(stopName);
         stop.setPadding(10, 5, 10, 5);
         row.addView(stop);
+        table.addView(row);
 
         for (String str : timesArray) {
-            TextView time = new TextView(getActivity());
-            time.setText(str);
-            time.setPadding(10, 5, 10, 5);
-            row.addView(time);
+            TextView times = new TextView(getActivity());
+            times.setText(str);
+            times.setPadding(10, 5, 10, 5);
+            r2.addView(times);
         }
 
-        t.addView(row);
+        time.addView(r2);
     }
 
     public void fillBusRoutes() {

@@ -81,21 +81,33 @@
             a:text="2222" />
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
+        a:orientation="horizontal"
         a:layout_width="match_parent"
         a:layout_height="wrap_content" >
 
-        <HorizontalScrollView
+        <TableLayout
+            a:id="@+id/times_table"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content" />
+
+        <ScrollView
             a:layout_width="match_parent"
             a:layout_height="wrap_content" >
 
-            <TableLayout
-                a:id="@+id/times_table"
+            <HorizontalScrollView
                 a:layout_width="match_parent"
                 a:layout_height="wrap_content" >
-            </TableLayout>
 
-        </HorizontalScrollView>
-    </ScrollView>
+                <TableLayout
+                    a:id="@+id/times"
+                    a:layout_width="0dp"
+                    a:layout_weight="2"
+                    a:layout_height="wrap_content" >
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
 
+    </LinearLayout>
 </LinearLayout>
