@@ -38,10 +38,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         List<Task> tasks = datasource.getAllTasks();
 
         // Use the SimpleCursorAdapter to show the elements in a ListView
-        /** At some point this should display check box and the date alongside
-            the title. The layout for this is defined in todo_row.xml, but I'm
-            not sure how to change the current code to do this.  **/
-        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this.getActivity(), android.R.layout.simple_list_item_1, tasks);
+        TaskArrayAdapter<Task> adapter = new TaskArrayAdapter<Task>(this.getActivity(), tasks);
         setListAdapter(adapter);
 
         // Make a button press call onClick in this class instead of MainActivity
@@ -63,12 +60,11 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         case R.id.addTask:
             // This is just a list of random names for the Task for testing, Obviously this
             // will eventually come from what the user types in.
-            String[] tasks = new String[] { "Task Test 1", "Task Test 2",
-                    "Task Test 3" };
-            int nextInt = new Random().nextInt(3);
+            String[] tasks = new String[] { "Task Test 1", "Task Test 2" };
+            int nextInt = new Random().nextInt(1);
             // Save the new comment to the database
             // This obviously needs more values setting, I've defaulted them to 0 or "" for now
-            task = datasource.createTask(tasks[nextInt], 0, "", 0, false, new Date());
+            task = datasource.createTask(tasks[nextInt], nextInt, "", 0, false, new Date());
             adapter.add(task);
             break;
 
