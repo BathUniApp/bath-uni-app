@@ -31,10 +31,7 @@ public class ClassesFragment extends ListFragment {
      //   setListAdapter(adapter);
         
         ListView list = (ListView) v.findViewById(android.R.id.list);
-        String[] days = { "Sunday", "Monday", "Tuesday", "Wednesday",
-        "Thursday", "Friday", "Saturday" };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-        android.R.layout.simple_list_item_1, days);
+        CalendarArrayAdapter<String> adapter = new CalendarArrayAdapter<String>(this.getActivity(), events);
         list.setAdapter(adapter);
 
         return v;
