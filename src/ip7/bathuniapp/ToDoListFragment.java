@@ -1,24 +1,18 @@
 package ip7.bathuniapp;
 
-<<<<<<< HEAD
 import java.util.*;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.app.Activity;
-=======
 import java.util.ArrayList;
 //import java.util.Calendar;
 import java.util.Date;
 //import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
-
-import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
->>>>>>> b4d0e43f189db4ca60250201e18ab77d5e31449b
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,7 +31,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
             Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.frag_todolist, container, false);
-        ListView listView = (ListView) v.findViewById(android.R.id.list);
+        //  ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         // Get the datasource for Tasks
         datasource = new TasksDataSource(this.getActivity());
