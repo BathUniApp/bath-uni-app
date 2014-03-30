@@ -15,7 +15,7 @@ public class SettingsFragment extends Fragment {
 	
 	private Spinner facultySpinner;
 	private Spinner departmentSpinner;
-	private Spinner courseSpinner;
+//	private Spinner courseSpinner;
 	private Spinner busRouteSpinner;
 	private EditText fullNameText;
 	private EditText usernameText;
@@ -30,7 +30,7 @@ public class SettingsFragment extends Fragment {
         // Grab the UI elements for use
         facultySpinner = (Spinner) view.findViewById(R.id.spinFaculty);
         departmentSpinner = (Spinner) view.findViewById(R.id.spinDepartment);
-        courseSpinner = (Spinner) view.findViewById(R.id.spinCourse);
+ //       courseSpinner = (Spinner) view.findViewById(R.id.spinCourse);
         busRouteSpinner = (Spinner) view.findViewById(R.id.spinBusRoute);
         fullNameText = (EditText) view.findViewById(R.id.etFullName);
         usernameText = (EditText) view.findViewById(R.id.etUsername);

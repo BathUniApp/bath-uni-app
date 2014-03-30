@@ -23,7 +23,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_END = "end";
 
     private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 9;
 
     // Database creation sql statement
     private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS
@@ -33,7 +33,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_DESCRIPTION + " text, "
             + COLUMN_PARENT_ID + " int, "
             + COLUMN_COMPLETE + " int, "
-            + COLUMN_DATE + " text);";
+            + COLUMN_DATE + " int);";
     
     private static final String EVENT_DATABASE_CREATE = "create table " + TABLE_EVENTS
             + "(" + COLUMN_ID + " integer primary key autoincrement, "
@@ -60,6 +60,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_EVENTS);
         onCreate(db);
     }
 

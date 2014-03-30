@@ -1,60 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/cat_pokoachondria">
+<LinearLayout xmlns:a="http://schemas.android.com/apk/res/android"
+    a:orientation="vertical"
+    a:layout_width="match_parent"
+    a:layout_height="match_parent" >
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Route:" />
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="1"
+            a:text="Route:" />
 
         <Spinner
-            android:id="@+id/route_spinner"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:entries="@array/bus_route_array" />
+            a:id="@+id/route_spinner"
+            a:layout_width="0dp"
+            a:layout_weight="2"
+            a:layout_height="wrap_content"
+            a:entries="@array/bus_route_array" />
 
         <Button
-            android:id="@+id/view_bus_map_button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="View Map" />
+            a:id="@+id/view_bus_map_button"
+            a:layout_width="0dp"
+            a:layout_weight="2"
+            a:layout_height="wrap_content"
+            a:text="View Map" />
 
     </LinearLayout>
 
-    <!-- <LinearLayout -->
-    <!--     android:orientation="horizontal" -->
-    <!--     android:layout_width="match_parent" -->
-    <!--     android:layout_height="wrap_content" > -->
+    <!-- next bus from chosen busstop -->
+    <LinearLayout
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
 
-    <!--     <TextView -->
-    <!--         android:layout_width="0dp" -->
-    <!--         android:layout_weight="1" -->
-    <!--         android:layout_height="wrap_content" -->
-    <!--         android:text="Next buses from this stop:" /> -->
+        <TextView
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:text="Next bus from:" />
 
-    <!--     <Spinner -->
-    <!--         android:id="@+id/busstop_spinner" -->
-    <!--         android:layout_width="0dp" -->
-    <!--         android:layout_weight="1" -->
-    <!--         android:layout_height="wrap_content" /> -->
+        <Spinner
+            a:id="@+id/busstop_spinner"
+            a:layout_width="0dp"
+            a:layout_weight="2"
+            a:layout_height="wrap_content"
+            a:entries="@array/u10_stops" />
 
-    <!--     <TextView -->
-    <!--         android:layout_width="0dp" -->
-    <!--         android:layout_weight="1" -->
-    <!--         android:layout_height="wrap_content" -->
-    <!--         android:text="time1" /> -->
+    </LinearLayout>
 
-    <!-- </LinearLayout> -->
+    <!-- next 3 buses from the busstop_spinner stop above -->
+    <LinearLayout
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
 
+        <TextView
+            a:id="@+id/time1"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:gravity="center"
+            a:text="0000" />
+        <TextView
+            a:id="@+id/time2"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:gravity="center"
+            a:text="1111" />
+        <TextView
+            a:id="@+id/time3"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:gravity="center"
+            a:text="2222" />
+    </LinearLayout>
+
+    <LinearLayout
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
+
+        <TableLayout
+            a:id="@+id/times_table"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content" />
+
+        <ScrollView
+            a:layout_width="match_parent"
+            a:layout_height="wrap_content" >
+
+            <HorizontalScrollView
+                a:layout_width="match_parent"
+                a:layout_height="wrap_content" >
+
+                <TableLayout
+                    a:id="@+id/times"
+                    a:layout_width="0dp"
+                    a:layout_weight="2"
+                    a:layout_height="wrap_content" >
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+
+    </LinearLayout>
 </LinearLayout>
