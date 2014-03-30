@@ -2,3 +2,4 @@ bin/
 gen/
 local.properties
 
+hs_err_*.log
