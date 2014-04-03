@@ -6,15 +6,14 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.support.v4.app.*;
 
-
-public class MainActivity extends FragmentActivity
-    implements ActionBar.TabListener {
+public class MainActivity extends FragmentActivity implements
+        ActionBar.TabListener {
 
     private NonSwipeableViewPager nsViewPager;
     private TabsPagerAdapter tabsAdapter;
     private ActionBar actionBar;
-    private String[] tabs = {"Settings", "Buses", "Classes",
-                             "To-Do list", "Maps" };
+    private String[] tabs = { "Settings", "Buses", "Classes", "To-Do list",
+            "Maps" };
 
     /** Called when the activity is first created. */
     @Override
@@ -30,11 +29,10 @@ public class MainActivity extends FragmentActivity
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        //add the tabs
+        // add the tabs
         for (String name : tabs) {
-            actionBar.addTab(actionBar.newTab()
-                       .setText(name)
-                       .setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText(name)
+                    .setTabListener(this));
         }
     }
 

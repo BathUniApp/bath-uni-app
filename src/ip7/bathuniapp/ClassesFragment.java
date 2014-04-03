@@ -15,7 +15,8 @@ public class ClassesFragment extends ListFragment {
     private CalendarDataSource datasource;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.frag_classes, container, false);
 
@@ -26,7 +27,8 @@ public class ClassesFragment extends ListFragment {
         // Return a list of Events saved in the database
         List<Event> events = datasource.getAllEvents();
 
-        CalendarArrayAdapter<Event> adapter = new CalendarArrayAdapter<Event>(this.getActivity(), events);
+        CalendarArrayAdapter<Event> adapter = new CalendarArrayAdapter<Event>(
+                this.getActivity(), events);
         setListAdapter(adapter);
 
         addEvent(v);
@@ -45,10 +47,12 @@ public class ClassesFragment extends ListFragment {
         String[] events = new String[] { "Event Test 1", "Event Test 2" };
         int nextInt = new Random().nextInt(1);
         // Save the new comment to the database
-        // This obviously needs more values setting, I've defaulted them to 0 or "" for now
-        event = datasource.createEvent(events[nextInt], "TestDesc", "TestLocation", "TestCourse", new Date(), new Date());
-        System.err.println(event); //TEST
-        System.err.println(adapter); //TEST
+        // This obviously needs more values setting, I've defaulted them to 0 or
+        // "" for now
+        event = datasource.createEvent(events[nextInt], "TestDesc",
+                "TestLocation", "TestCourse", new Date(), new Date());
+        System.err.println(event); // TEST
+        System.err.println(adapter); // TEST
         adapter.add(event);
 
         adapter.notifyDataSetChanged();

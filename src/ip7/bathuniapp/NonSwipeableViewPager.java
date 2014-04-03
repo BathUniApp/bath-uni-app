@@ -16,11 +16,11 @@ public class NonSwipeableViewPager extends ViewPager {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        return false; //never allow swiping to switch between tabs
+        return false; // never allow swiping to switch between tabs
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return false; //never allow swiping to switch between tabs
+        return false; // never allow swiping to switch between tabs
     }
 }
