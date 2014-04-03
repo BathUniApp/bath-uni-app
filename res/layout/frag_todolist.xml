@@ -65,4 +65,11 @@
         android:layout_height="wrap_content"
         android:text="No tasks added yet." />
 
+    <Button
+        android:id="@+id/removeTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REMOVE"
+        android:onClick="removeListItem" />
+
 </LinearLayout>
