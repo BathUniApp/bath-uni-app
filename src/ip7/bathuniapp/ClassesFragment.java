@@ -44,7 +44,7 @@ public class ClassesFragment extends ListFragment {
     
     // Handle the user clicking a button
     public void addEvent(View view) {
-     //   @SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
         ArrayAdapter<Event> adapter = (ArrayAdapter<Event>) getListAdapter();
 
         Event event = null;
