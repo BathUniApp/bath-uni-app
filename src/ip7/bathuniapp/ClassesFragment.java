@@ -1,11 +1,14 @@
 package ip7.bathuniapp;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.support.v4.app.ListFragment;
 
@@ -25,15 +28,36 @@ public class ClassesFragment extends ListFragment {
         List<Event> events = datasource.getAllEvents();
 
         // Use the SimpleCursorAdapter to show the elements in a ListView
-     //   ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this.getActivity(),
-      //          android.R.layout.simple_list_item_1, events);
-     //   setListAdapter(adapter);
+        CalendarArrayAdapter<Event> adapter = new CalendarArrayAdapter<Event>(this.getActivity(), events);
+        setListAdapter(adapter);
         
         ListView list = (ListView) v.findViewById(android.R.id.list);
-        CalendarArrayAdapter<String> adapter = new CalendarArrayAdapter<String>(this.getActivity(), events);
+  //      CalendarArrayAdapter<String> adapter = new CalendarArrayAdapter<String>(this.getActivity(), events);
         list.setAdapter(adapter);
+        
+        addEvent(v);
+        addEvent(v);
+        addEvent(v);
 
         return v;
+    }
+    
+    // Handle the user clicking a button
+    public void addEvent(View view) {
+     //   @SuppressWarnings("unchecked")
+        ArrayAdapter<Event> adapter = (ArrayAdapter<Event>) getListAdapter();
+
+        Event event = null;
+        String[] events = new String[] { "Event Test 1", "Event Test 2" };
+        int nextInt = new Random().nextInt(1);
+        // Save the new comment to the database
+        // This obviously needs more values setting, I've defaulted them to 0 or "" for now
+        event = datasource.createEvent(events[nextInt], "TestDesc", "TestLocation", "TestCourse", new Date(), new Date());
+        System.err.println(event); //TEST
+        System.err.println(adapter); //TEST
+        adapter.add(event);
+           
+        adapter.notifyDataSetChanged();
     }
     
     @Override

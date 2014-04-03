@@ -23,7 +23,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_END = "end";
 
     private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
 
     // Database creation sql statement
     private static final String TASK_DATABASE_CREATE = "create table " + TABLE_TASKS
@@ -41,8 +41,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_DESCRIPTION + " text, "
             + COLUMN_LOCATION + " text, "
             + COLUMN_COURSE + " text, "
-            + COLUMN_START + " text, "
-            + COLUMN_END + " text);";
+            + COLUMN_START + " int, "
+            + COLUMN_END + " int);";
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

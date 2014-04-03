@@ -50,8 +50,8 @@ public class CalendarDataSource {
         values.put(SQLiteHelper.COLUMN_COURSE, course);
         values.put(SQLiteHelper.COLUMN_START, df.format(start));
         values.put(SQLiteHelper.COLUMN_END, df.format(end));
-        long insertId = database.insert(SQLiteHelper.TABLE_TASKS, null, values);
-        Cursor cursor = database.query(SQLiteHelper.TABLE_TASKS, allColumns,
+        long insertId = database.insert(SQLiteHelper.TABLE_EVENTS, null, values);
+        Cursor cursor = database.query(SQLiteHelper.TABLE_EVENTS, allColumns,
                 SQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null,
                 null);
         cursor.moveToFirst();
