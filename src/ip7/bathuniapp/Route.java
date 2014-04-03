@@ -12,5 +12,4 @@ public class Route {
 		name = routeName;
 		days = theDays;
 	}
-
 }
