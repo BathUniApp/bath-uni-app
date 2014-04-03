@@ -13,8 +13,8 @@ public class MainActivity extends FragmentActivity
     private NonSwipeableViewPager nsViewPager;
     private TabsPagerAdapter tabsAdapter;
     private ActionBar actionBar;
-    private String[] tabs = {"Settings", "Buses", "Classes",
-                             "To-Do list", "Maps" };
+    private String[] tabs = {"Settings", "Buses", "Lectures",
+                             "To-Do list", "Maps", "Classes"};
 
     /** Called when the activity is first created. */
     @Override
