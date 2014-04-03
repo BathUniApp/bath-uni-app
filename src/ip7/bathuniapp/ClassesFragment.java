@@ -14,7 +14,7 @@ public class ClassesFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
+
         View v = inflater.inflate(R.layout.frag_classes, container, false);
 
         // Get the datasource for Events
@@ -25,17 +25,18 @@ public class ClassesFragment extends ListFragment {
         List<Event> events = datasource.getAllEvents();
 
         // Use the SimpleCursorAdapter to show the elements in a ListView
-     //   ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this.getActivity(),
+     //   ArrayAdapter<Event> adapter = new
+     //   ArrayAdapter<Event>(this.getActivity(),
       //          android.R.layout.simple_list_item_1, events);
      //   setListAdapter(adapter);
-        
+
         ListView list = (ListView) v.findViewById(android.R.id.list);
         CalendarArrayAdapter<String> adapter = new CalendarArrayAdapter<String>(this.getActivity(), events);
         list.setAdapter(adapter);
 
         return v;
     }
-    
+
     @Override
     public void onResume() {
         datasource.open();
