@@ -15,11 +15,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         case 1:
             return new BusesFragment();
         case 2:
-            return new ClassesFragment();
+            return new LecturesFragment();
         case 3:
             return new ToDoListFragment();
         case 4:
             return new MapsFragment();
+        case 5:
+            return new ClassesFragment();
         }
         return null;
     }
@@ -27,6 +29,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // item count, equal to number of tabs
-        return 5;
+        return 6;
     }
 }
