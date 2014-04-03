@@ -40,4 +40,9 @@ public class TaskArrayAdapter<T> extends ArrayAdapter<T> {
 
 	    return rowView;
 	}
+    
+    @Override
+    public int getCount () {
+        return tasks.size ();
+    }
 }

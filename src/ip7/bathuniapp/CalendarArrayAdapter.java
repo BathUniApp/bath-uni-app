@@ -36,4 +36,9 @@ public class CalendarArrayAdapter<T> extends ArrayAdapter<T> {
 
         return rowView;
     }
+    
+    @Override
+    public int getCount () {
+        return events.size ();
+    }
 }
