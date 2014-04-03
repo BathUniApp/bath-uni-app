@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.support.v4.app.ListFragment;
 
 public class ClassesFragment extends ListFragment {
@@ -27,18 +26,8 @@ public class ClassesFragment extends ListFragment {
         // Return a list of Events saved in the database
         List<Event> events = datasource.getAllEvents();
 
-        // Use the SimpleCursorAdapter to show the elements in a ListView
-     //   ArrayAdapter<Event> adapter = new
-     //   ArrayAdapter<Event>(this.getActivity(),
-      //          android.R.layout.simple_list_item_1, events);
-     //   setListAdapter(adapter);
-
         CalendarArrayAdapter<Event> adapter = new CalendarArrayAdapter<Event>(this.getActivity(), events);
         setListAdapter(adapter);
-
-        ListView list = (ListView) v.findViewById(android.R.id.list);
-  //      CalendarArrayAdapter<String> adapter = new CalendarArrayAdapter<String>(this.getActivity(), events);
-        list.setAdapter(adapter);
 
         addEvent(v);
         addEvent(v);
