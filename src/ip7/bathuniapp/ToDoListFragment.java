@@ -1,14 +1,9 @@
 package ip7.bathuniapp;
 
-import java.util.*;
-
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.app.Activity;
 import java.util.ArrayList;
-//import java.util.Calendar;
 import java.util.Date;
-//import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 import android.view.LayoutInflater;
