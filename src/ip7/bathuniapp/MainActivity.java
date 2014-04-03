@@ -12,13 +12,8 @@ public class MainActivity extends FragmentActivity implements
     private NonSwipeableViewPager nsViewPager;
     private TabsPagerAdapter tabsAdapter;
     private ActionBar actionBar;
-<<<<<<< HEAD
-    private String[] tabs = { "Settings", "Buses", "Classes", "To-Do list",
-            "Maps" };
-=======
     private String[] tabs = {"Settings", "Buses", "Lectures",
                              "To-Do list", "Maps", "Classes"};
->>>>>>> FETCH_HEAD
 
     /** Called when the activity is first created. */
     @Override
