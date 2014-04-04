@@ -10,7 +10,7 @@ public class Event {
     private String course;
     private Date start;
     private Date end;
-    
+
     public long getId() {
         return id;
     }
@@ -66,6 +66,5 @@ public class Event {
     public void setEnd(Date end) {
         this.end = end;
     }
-    
-    
+
 }

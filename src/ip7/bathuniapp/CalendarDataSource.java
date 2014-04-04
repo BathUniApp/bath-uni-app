@@ -42,7 +42,8 @@ public class CalendarDataSource {
 
     // Create a new task
     // Note: SQLlite only supports int and String.
-    public Event createEvent(String title, String description, String location, String course, Date start, Date end) {
+    public Event createEvent(String title, String description, String location,
+            String course, Date start, Date end) {
         ContentValues values = new ContentValues();
         values.put(SQLiteHelper.COLUMN_TITLE, title);
         values.put(SQLiteHelper.COLUMN_DESCRIPTION, description);
@@ -50,7 +51,8 @@ public class CalendarDataSource {
         values.put(SQLiteHelper.COLUMN_COURSE, course);
         values.put(SQLiteHelper.COLUMN_START, df.format(start));
         values.put(SQLiteHelper.COLUMN_END, df.format(end));
-        long insertId = database.insert(SQLiteHelper.TABLE_EVENTS, null, values);
+        long insertId = database
+                .insert(SQLiteHelper.TABLE_EVENTS, null, values);
         Cursor cursor = database.query(SQLiteHelper.TABLE_EVENTS, allColumns,
                 SQLiteHelper.COLUMN_ID + " = " + insertId, null, null, null,
                 null);
