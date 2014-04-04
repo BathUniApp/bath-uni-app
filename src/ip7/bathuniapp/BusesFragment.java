@@ -57,8 +57,8 @@ public class BusesFragment extends Fragment {
         // how to add times to the timetable. The bus stops should
         // obviously come from whatever route is selected, rather than
         // being entered manually.
-        fillTimeTable("Random Name", table, times, busTimesArray);
-        fillTimeTable("Second Stop", table, times, busTimesArray);
+        fillRow("Random Name", table, times, busTimesArray, 0);
+        fillRow("Second Stop", table, times, busTimesArray, 1);
 
         // View view = inflater.inflate(R.layout.frag_buses, container, false);
         // route = (Spinner) view.findViewById(R.id.route_spinner);
@@ -67,35 +67,41 @@ public class BusesFragment extends Fragment {
         return v;
     }
 
-    public void fillTimeTable(String stopName, TableLayout table,
-                              TableLayout time, ArrayList<String> timesArray) {
+    public void fillRow(String stopName, TableLayout table,
+                              TableLayout time, ArrayList<String> timesArray,
+                              int rowCounter) {
 
-        TableRow row = new TableRow(this.getActivity());
-        TableRow.LayoutParams params =
+        TableRow busStopRow = new TableRow(this.getActivity());
+        TableRow.LayoutParams busStopParams =
             new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                       TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
-        row.setLayoutParams(params);
+        busStopRow.setLayoutParams(busStopParams);
 
-        TableRow r2 = new TableRow(this.getActivity());
-        TableRow.LayoutParams p2 =
+        TableRow busTimesRow = new TableRow(this.getActivity());
+        TableRow.LayoutParams busTimesParams =
             new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                       TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
-        r2.setLayoutParams(p2);
+        busTimesRow.setLayoutParams(busTimesParams);
 
         TextView stop = new TextView(this.getActivity());
         stop.setText(stopName);
         stop.setPadding(10, 5, 10, 5);
-        row.addView(stop);
-        table.addView(row);
+        busStopRow.addView(stop);
+        table.addView(busStopRow);
+
+        if (rowCounter % 2 == 0) {
+            busStopRow.setBackgroundResource(R.color.list_background);
+            busTimesRow.setBackgroundResource(R.color.list_background);
+        }
 
         for (String str : timesArray) {
             TextView times = new TextView(getActivity());
             times.setText(str);
             times.setPadding(10, 5, 10, 5);
-            r2.addView(times);
+            busTimesRow.addView(times);
         }
 
-        time.addView(r2);
+        time.addView(busTimesRow);
     }
 
 
