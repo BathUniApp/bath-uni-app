@@ -68,7 +68,6 @@ public class BusesFragment extends Fragment {
     }
 
     public void fillTimeTable(String stopName, TableLayout table,
-<<<<<<< HEAD
                               TableLayout time, ArrayList<String> timesArray){
 
         TableRow row = new TableRow(this.getActivity());
@@ -81,7 +80,6 @@ public class BusesFragment extends Fragment {
         TableRow.LayoutParams p2 =
             new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
                                       TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
-=======
             TableLayout time, ArrayList<String> timesArray) {
         TableRow row = new TableRow(this.getActivity());
         TableRow.LayoutParams params = new TableRow.LayoutParams(
@@ -93,7 +91,6 @@ public class BusesFragment extends Fragment {
         TableRow.LayoutParams p2 = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
->>>>>>> 5272058658cc1de059503cf0886233675d9f4fd8
         r2.setLayoutParams(p2);
 
         TextView stop = new TextView(this.getActivity());
