@@ -57,6 +57,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="blue">#33B5E5</color>
-    <color name="list_background">#0c2d39</color>
+    <color name="list_background">#3033B5E5</color>
 
 </resources>
