@@ -12,11 +12,10 @@ public class LecturesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.classes_day, container, false);
+        View v = inflater.inflate(R.layout.lectures_week, container, false);
 
         // table with the lecture times column (rows, technically)
-        TableLayout lectureTable = (TableLayout) v.findViewById(R.id.lecture_table);
-
+        TableLayout lectureTable = (TableLayout) v.findViewById(R.id.lecture_times);
         // table with the lectures for the given time and the week days
         TableLayout lectures     = (TableLayout) v.findViewById(R.id.lectures);
 
@@ -28,22 +27,20 @@ public class LecturesFragment extends Fragment {
     public void fillTimeTable(TableLayout lecTimeTable, TableLayout lecs) {
 
         // this is just a placeholder to test the table. Should obviously be replaced
-        // by whatever actually holds the lectre information,
-        String[] placeholder = {"-mon-", "-tue-", "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
-
+        // by whatever actually holds the lectre information.
+        String[] placeholder = {"lecturelecture \n room \n weeks", "-tue-", "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
         String[] daysArray = {"Monday", "Tuesday", "Wednesday", "Thursday",
                               "Friday", "Saturday", "Sunday"};
         String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
                                "13:15", "14:15", "15:15", "16:15", "17:15"};
-        // if even, colour row blue
-        int colourCounter = 0;
 
-        // fill the first row with the day names
-        fillRow(lecTimeTable, lecs, " ", daysArray, 1);
+        int colourCounter = 0;// if even, colour row blue
 
-        // fill the row with placeholders for lectures
-        // this will clearly depend on what the actual lecture info comes in.
-        // Ideally, that would be a string or two with the lecture and room codes.
+        fillRow(lecTimeTable, lecs, " ", daysArray, 1); // first row contains day names
+
+        // fill the row with placeholders for lectures. The table can
+        // comfortably hold three lines of information (lecure code,
+        // room code, weeks running)
         for (String time : timesArray) {
             fillRow(lecTimeTable, lecs, time, placeholder, colourCounter);
             colourCounter++;
@@ -71,27 +68,39 @@ public class LecturesFragment extends Fragment {
                                       1.0f);
         lectureRow.setLayoutParams(lectureParams);
 
-        TextView time = new TextView(this.getActivity());
-        time.setText(lectureTime);
-        time.setPadding(10, 5, 10, 5);
-        timeRow.addView(time);
-
+        // if even, colour dark blue
         if (rowCounter % 2 == 0) {
             timeRow.setBackgroundResource(R.color.list_background);
             lectureRow.setBackgroundResource(R.color.list_background);
         }
 
-        lecTimeTable.addView(timeRow);
-
+        // add the lecture times
+        TextView time = new TextView(this.getActivity());
+        setTextViewOptions(time, 3, android.view.Gravity.CENTER,
+                           10, 5, 10, 5,
+                           lectureTime);
+        timeRow.addView(time); // add the textview to the row
+        lecTimeTable.addView(timeRow); // add the row to the table
 
         // add the lectures to the row
-        for (String d : lectures) {
-            TextView day = new TextView(getActivity());
-            day.setText(d);
-            day.setPadding(10, 5, 10, 5);
-            lectureRow.addView(day);
+        for (String l : lectures) {
+            TextView lecture = new TextView(getActivity());
+            setTextViewOptions(lecture, 3, android.view.Gravity.CENTER_HORIZONTAL,
+                               10, 5, 10, 5,
+                               l);
+             lectureRow.addView(lecture);
         }
         lecs.addView(lectureRow);
 
+    }
+
+    public void setTextViewOptions(TextView textView, int minLines, int gravity,
+                                   int paddingLeft, int paddingTop,
+                                   int paddingRight, int paddingBottom,
+                                   String text) {
+        textView.setMinLines(minLines);
+        textView.setGravity(gravity);
+        textView.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        textView.setText(text);
     }
 }
