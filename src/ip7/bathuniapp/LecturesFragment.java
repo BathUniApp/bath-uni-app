@@ -1,11 +1,51 @@
 package ip7.bathuniapp;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.SocketException;
+import java.net.URI;
+import java.util.GregorianCalendar;
+
+import net.fortuna.ical4j.data.CalendarBuilder;
+import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.data.ParserException;
+import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.Component;
+import net.fortuna.ical4j.model.ComponentList;
+import net.fortuna.ical4j.model.Date;
+import net.fortuna.ical4j.model.ParameterList;
+import net.fortuna.ical4j.model.Property;
+import net.fortuna.ical4j.model.PropertyList;
+import net.fortuna.ical4j.model.TimeZone;
+import net.fortuna.ical4j.model.TimeZoneRegistry;
+import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
+import net.fortuna.ical4j.model.ValidationException;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VTimeZone;
+import net.fortuna.ical4j.model.parameter.Cn;
+import net.fortuna.ical4j.model.parameter.Encoding;
+import net.fortuna.ical4j.model.parameter.Role;
+import net.fortuna.ical4j.model.parameter.Value;
+import net.fortuna.ical4j.model.property.Attach;
+import net.fortuna.ical4j.model.property.Attendee;
+import net.fortuna.ical4j.model.property.CalScale;
+import net.fortuna.ical4j.model.property.ProdId;
+import net.fortuna.ical4j.model.property.Version;
+import net.fortuna.ical4j.util.UidGenerator;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.*;
 
 public class LecturesFragment extends Fragment {
@@ -14,6 +54,45 @@ public class LecturesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lectures_week, container, false);
+        
+        AssetManager assManager = getActivity().getApplicationContext().getAssets();
+        InputStream in = null;
+        try {
+            in = assManager.open("test.ics");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CalendarBuilder builder = new CalendarBuilder();
+        Calendar calendar = null;
+        try {
+            calendar = builder.build(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserException e) {
+            e.printStackTrace();
+        }
+        if (calendar != null) {
+            System.out.println("value :" + calendar);
+            
+            for (Object event : calendar.getComponents(Component.VEVENT)) {
+                if (((VEvent) event).getSummary() != null) {
+                    System.out.println(((VEvent) event).getSummary().getValue());
+                    System.out.println(((VEvent) event).getStartDate().getDate());
+                
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         // table with the lecture times column (rows, technically)
         TableLayout lectureTable = (TableLayout) v.findViewById(R.id.lecture_times);
