@@ -16,10 +16,10 @@ public class MapsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_maps, container, false);
-        
+
         TouchImageView img = (TouchImageView) v.findViewById(R.id.img);
         img.setMaxZoom(4);
-        
+
         return v;
     }
 }

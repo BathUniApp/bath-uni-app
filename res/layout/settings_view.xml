@@ -107,22 +107,22 @@
     </TableRow>
 
     <TableRow
-        android:id="@+id/trCourse"
+        android:id="@+id/tYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dip" >
 
         <TextView
-            android:id="@+id/tvCourse"
+            android:id="@+id/tvYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:layout_weight="1"
-            android:text="@string/course"
+            android:text="@string/year"
             android:textSize="24sp" />
 
         <Spinner
-            android:id="@+id/spinCourse"
+            android:id="@+id/spinYear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

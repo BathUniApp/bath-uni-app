@@ -20,8 +20,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
             return new ToDoListFragment();
         case 4:
             return new MapsFragment();
-        case 5:
-            return new ClassesFragment();
         }
         return null;
     }
@@ -29,6 +27,6 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // item count, equal to number of tabs
-        return 6;
+        return 5;
     }
 }

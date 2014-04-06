@@ -5,20 +5,13 @@
     <string name="username">Username:</string>
     <string name="faculty">Faculty:</string>
     <string name="department">Department:</string>
-    <string name="course">Course:</string>
+    <string name="year">Year:</string>
     <string name="bus_route">Bus Route:</string>
 
     <string-array name="faculty_array">
         <item>Engineering</item>
         <item>Humanities and Social Sciences</item>
         <item>Science</item>
-    </string-array>
-
-    <string-array name="bus_route_array">
-        <item>U10</item>
-        <item>18</item>
-        <item>U18</item>
-        <item>X18</item>
     </string-array>
 
     <string-array name="course_science_array">
@@ -36,12 +29,26 @@
         <item>Electronic</item>
         <item>Mechanical</item>
     </string-array>
+    
     <string-array name="course_humanities_array">
         <item>Economics</item>
         <item>Education</item>
         <item>Health</item>
         <item>Politics</item>
         <item>Psychology</item>
+    </string-array>
+    
+    <string-array name="year_array">
+        <item>Year 1</item>
+        <item>Year 2</item>
+        <item>Year 3</item>
+    </string-array>
+    
+    <string-array name="bus_route_array">
+        <item>U10</item>
+        <item>18</item>
+        <item>U18</item>
+        <item>X18</item>
     </string-array>
 
     <string-array name="u10_stops">
