@@ -2,6 +2,7 @@ package ip7.bathuniapp;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -26,9 +27,11 @@ public class LecturesFragment extends Fragment {
 
     public void fillTimeTable(TableLayout lecTimeTable, TableLayout lecs) {
 
-        // this is just a placeholder to test the table. Should obviously be replaced
-        // by whatever actually holds the lectre information.
-        String[] placeholder = {"lecturelecture \n room \n weeks", "-tue-", "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
+        // this is just a placeholder to test the table. Should
+        // obviously be replaced by whatever actually holds the lectre
+        // inf++ormation.
+        String[] placeholder = {"lecturelecture \n room \n weeks", "-tue-",
+                                "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
         String[] daysArray = {"Monday", "Tuesday", "Wednesday", "Thursday",
                               "Friday", "Saturday", "Sunday"};
         String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
@@ -49,8 +52,9 @@ public class LecturesFragment extends Fragment {
 
     public void fillRow(TableLayout lecTimeTable, TableLayout lecs,
                         String lectureTime, String[] lectures, int rowCounter) {
-        // lecTimeTable is the outmost table, holding the lectures and the times column
-        // lecs is the table inside it, holding the lectures themselves
+        // lecTimeTable is the outmost table, holding the lectures and
+        // the times column lecs is the table inside it, holding the
+        // lectures themselves
 
         // row in the outside table, containing the time (first column)
         TableRow timeRow = new TableRow(this.getActivity());
@@ -76,18 +80,15 @@ public class LecturesFragment extends Fragment {
 
         // add the lecture times
         TextView time = new TextView(this.getActivity());
-        setTextViewOptions(time, 3, android.view.Gravity.CENTER,
-                           10, 5, 10, 5,
-                           lectureTime);
+        setTextViewOptions(time, 3, Gravity.CENTER, 10, 5, 10, 5, lectureTime);
         timeRow.addView(time); // add the textview to the row
         lecTimeTable.addView(timeRow); // add the row to the table
 
         // add the lectures to the row
         for (String l : lectures) {
             TextView lecture = new TextView(getActivity());
-            setTextViewOptions(lecture, 3, android.view.Gravity.CENTER_HORIZONTAL,
-                               10, 5, 10, 5,
-                               l);
+            setTextViewOptions(lecture, 3, Gravity.CENTER_HORIZONTAL,
+                               10, 5, 10, 5, l);
              lectureRow.addView(lecture);
         }
         lecs.addView(lectureRow);

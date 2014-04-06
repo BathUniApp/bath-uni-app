@@ -3,6 +3,11 @@
 
     <style name="app_theme" parent="android:style/Theme.Holo">
         <item name="android:windowBackground">@drawable/app_background</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="app_theme.table_item">
+        <item name="android:textSize">12sp</item>
     </style>
 
 </resources>

@@ -31,6 +31,12 @@
 
     </LinearLayout>
 
+    <View
+        a:layout_width="match_parent"
+        a:layout_height="2dip"
+        a:background="@color/blue"
+        a:layout_margin="3dip"/>
+
     <!-- next bus from chosen busstop -->
     <LinearLayout
         a:orientation="horizontal"
@@ -39,14 +45,14 @@
 
         <TextView
             a:layout_width="0dp"
-            a:layout_weight="1"
+            a:layout_weight="2"
             a:layout_height="wrap_content"
-            a:text="Next bus from:" />
+            a:text="Next 3 buses from:" />
 
         <Spinner
             a:id="@+id/busstop_spinner"
             a:layout_width="0dp"
-            a:layout_weight="2"
+            a:layout_weight="3"
             a:layout_height="wrap_content"
             a:entries="@array/u10_stops" />
 
@@ -80,6 +86,13 @@
             a:gravity="center"
             a:text="2222" />
     </LinearLayout>
+
+    <View
+        a:layout_width="match_parent"
+        a:layout_height="2dip"
+        a:background="@color/blue"
+        a:layout_marginTop="10dip"
+        a:layout_marginBottom="10dip" />
 
     <LinearLayout
         a:orientation="horizontal"
