@@ -28,12 +28,12 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.settings_view, container, false);
 
         // Grab the UI elements for use
+        fullNameText = (EditText) view.findViewById(R.id.etFullName);
+        usernameText = (EditText) view.findViewById(R.id.etUsername);
         facultySpinner = (Spinner) view.findViewById(R.id.spinFaculty);
         departmentSpinner = (Spinner) view.findViewById(R.id.spinDepartment);
         yearSpinner = (Spinner) view.findViewById(R.id.spinYear);
         busRouteSpinner = (Spinner) view.findViewById(R.id.spinBusRoute);
-        fullNameText = (EditText) view.findViewById(R.id.etFullName);
-        usernameText = (EditText) view.findViewById(R.id.etUsername);
 
         // Use the above view to populate the spinner
         setSpinnerContent(view, facultySpinner, R.array.faculty_array);
@@ -44,6 +44,10 @@ public class SettingsFragment extends Fragment {
         SharedPreferences settings = this.getActivity().getPreferences(0);
         fullNameText.setText(settings.getString("name", ""));
         usernameText.setText(settings.getString("username", ""));
+        facultySpinner.setSelection(settings.getInt("faculty", 0));
+        departmentSpinner.setSelection(settings.getInt("department", 0));
+        yearSpinner.setSelection(settings.getInt("year", 0));
+        busRouteSpinner.setSelection(settings.getInt("bus", 0));
 
         // Update Department spinner when Faculty spinner changes
         facultySpinner
@@ -76,7 +80,6 @@ public class SettingsFragment extends Fragment {
                     public void onNothingSelected(AdapterView<?> parent) {
                         // Interface callback
                     }
-
                 });
 
         return view;
@@ -89,6 +92,10 @@ public class SettingsFragment extends Fragment {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("name", fullNameText.getText().toString());
         editor.putString("username", usernameText.getText().toString());
+        editor.putInt("faculty", facultySpinner.getSelectedItemPosition());
+        editor.putInt("department", departmentSpinner.getSelectedItemPosition());
+        editor.putInt("course", yearSpinner.getSelectedItemPosition());
+        editor.putInt("bus", busRouteSpinner.getSelectedItemPosition());
         
         //Commit edits
         editor.commit();  
