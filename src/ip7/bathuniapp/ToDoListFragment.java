@@ -21,9 +21,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.frag_todolist, container, false);
-        // ListView listView = (ListView) v.findViewById(android.R.id.list);
 
         // Get the datasource for Tasks
         datasource = new TasksDataSource(this.getActivity());
@@ -32,24 +30,16 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
         // Return a list of tasks saved in the database
         ArrayList<Task> tasks = datasource.getAllTasks();
 
-        // TESTING
-        for (Task task : tasks) {
-            System.out.println(task);
-        }
-
         // Use the SimpleCursorAdapter to show the elements in a ListView
         adapter = new TaskAdapter(this.getActivity(), R.layout.todo_row, tasks);
         setListAdapter(adapter);
 
-        // Make a button press call onClick in this class instead of
-        // MainActivity
+        // Make buttonpresses call onClick in this class
         Button addTask = (Button) v.findViewById(R.id.addTask);
         addTask.setOnClickListener(this);
         Button removeTask = (Button) v.findViewById(R.id.removeTask);
         removeTask.setOnClickListener(this);
 
-        // add options menu to actionbar
-        // setHasOptionsMenu(true);
         return v;
     }
 
@@ -81,7 +71,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
 
         adapter.notifyDataSetChanged();
     }
-
+    
     @Override
     public void onResume() {
         datasource.open();

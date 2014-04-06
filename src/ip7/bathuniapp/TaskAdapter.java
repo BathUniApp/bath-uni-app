@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -39,6 +40,13 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         CheckBox complete = (CheckBox) rowView.findViewById(R.id.item_check);
         complete.setChecked(data.get(position).getComplete());
+//        complete.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                data.get(position).setComplete(complete.isChecked());
+//                
+//            }
+//        });
 
         return rowView;
     }
