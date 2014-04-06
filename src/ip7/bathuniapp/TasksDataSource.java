@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -72,8 +71,8 @@ public class TasksDataSource {
                 + " = " + id, null);
     }
 
-    public List<Task> getAllTasks() {
-        List<Task> tasks = new ArrayList<Task>();
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         Cursor cursor = database.query(SQLiteHelper.TABLE_TASKS, allColumns,
                 null, null, null, null, null);

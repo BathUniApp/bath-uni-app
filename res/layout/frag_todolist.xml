@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/modeChange"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mode Change"
-        android:onClick="changeView" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,15 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/item1Date"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="DD/MM"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            
             <EditText
                 android:id="@+id/item1"
                 android:layout_width="0dp"
@@ -37,6 +22,14 @@
                 android:gravity="left"
                 android:text="Enter Title" />
 
+            <EditText
+                android:id="@+id/item1Date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="DD/MM"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+            
         </LinearLayout>
 
         <EditText
@@ -69,7 +62,7 @@
         android:id="@+id/removeTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="REMOVE"
-        android:onClick="removeListItem" />
+        android:text="REMOVE SELECTED"
+        android:onClick="onClick" />
 
 </LinearLayout>
