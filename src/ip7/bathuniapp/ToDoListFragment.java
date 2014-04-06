@@ -31,9 +31,9 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
 
         // Return a list of tasks saved in the database
         ArrayList<Task> tasks = datasource.getAllTasks();
-        
+
         // TESTING
-        for(Task task: tasks) {
+        for (Task task : tasks) {
             System.out.println(task);
         }
 
@@ -78,7 +78,7 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
             }
             break;
         }
-        
+
         adapter.notifyDataSetChanged();
     }
 
