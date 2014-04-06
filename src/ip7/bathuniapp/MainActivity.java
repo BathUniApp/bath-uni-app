@@ -13,7 +13,7 @@ public class MainActivity extends FragmentActivity implements
     private TabsPagerAdapter tabsAdapter;
     private ActionBar actionBar;
     private String[] tabs = {"Settings", "Buses", "Lectures",
-                             "To-Do list", "Map", "Classes"};
+                             "To-Do list", "Maps", "Classes"};
 
     /** Called when the activity is first created. */
     @Override
