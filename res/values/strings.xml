@@ -52,6 +52,13 @@
         <item>10</item>
     </string-array>
     
+    <string-array name="bus_route_type_array">
+        <item>Term Weekday</item>
+        <item>Term Weekend</item>
+        <item>Holiday Weekday</item>
+        <item>Holiday Weekend</item>
+    </string-array>
+    
     <string-array name="stops_18">
         <item>University of Bath</item>
         <item>Bus Station [dep]</item>

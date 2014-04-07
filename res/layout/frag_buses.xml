@@ -23,6 +23,26 @@
             a:entries="@array/bus_route_array" />
 
     </LinearLayout>
+    
+        <LinearLayout
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
+
+        <TextView
+            a:layout_width="0dp"
+            a:layout_height="wrap_content"
+            a:layout_weight="1"
+            a:text="Route Type:" />
+
+        <Spinner
+            a:id="@+id/route_type_spinner"
+            a:layout_width="0dp"
+            a:layout_weight="2"
+            a:layout_height="wrap_content"
+            a:entries="@array/bus_route_type_array" />
+
+    </LinearLayout>
 
     <View
         a:layout_width="match_parent"
@@ -62,21 +82,21 @@
             a:layout_weight="1"
             a:layout_height="wrap_content"
             a:gravity="center"
-            a:text="0000" />
+            a:text="No more Buses" />
         <TextView
             a:id="@+id/time2"
             a:layout_width="0dp"
             a:layout_weight="1"
             a:layout_height="wrap_content"
             a:gravity="center"
-            a:text="1111" />
+            a:text="No more Buses" />
         <TextView
             a:id="@+id/time3"
             a:layout_width="0dp"
             a:layout_weight="1"
             a:layout_height="wrap_content"
             a:gravity="center"
-            a:text="2222" />
+            a:text="No more buses" />
     </LinearLayout>
 
     <View
