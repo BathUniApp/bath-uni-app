@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,21 +20,100 @@ public class BusesFragment extends Fragment {
 
     private static Map<String, BusRoute> allRoutes = new HashMap<String, BusRoute>();
 
-    private Spinner route;
+    private Spinner routeSpinner;
+    private Spinner stopSpinner;
 
-    // private Spinner stop;
+    private TextView nextBus1;
+    private TextView nextBus2;
+    private TextView nextBus3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_buses, container, false);
-        route = (Spinner) v.findViewById(R.id.route_spinner);
-        // stop = (Spinner) v.findViewById(R.id.busstop_spinner);
+        routeSpinner = (Spinner) v.findViewById(R.id.route_spinner);
+        stopSpinner = (Spinner) v.findViewById(R.id.busstop_spinner);
+        nextBus1 = (TextView) v.findViewById(R.id.time1);
+        nextBus2 = (TextView) v.findViewById(R.id.time2);
+        nextBus3 = (TextView) v.findViewById(R.id.time3);
+        
+        routeSpinner
+        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent,
+                    View view, int pos, long id) {
+
+                // Update department spinner from appropriate array
+                if (parent.getItemAtPosition(pos).equals("U18")) {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.stops_U18);
+                } else if (parent.getItemAtPosition(pos).equals(
+                        "18")) {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.stops_18);
+                } else if (parent.getItemAtPosition(pos).equals(
+                        "X18")) {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.stops_X18);
+                } else if (parent.getItemAtPosition(pos).equals(
+                        "U10")) {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.stops_U10);
+                } else if (parent.getItemAtPosition(pos).equals(
+                        "10")) {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.stops_10);
+                } else {
+                    setSpinnerContent(view, stopSpinner,
+                            R.array.empty_array);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Interface callback
+            }
+        });
+        
+        stopSpinner
+        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent,
+                    View view, int pos, long id) {
+                
+                int currentTime = getCurrentTime();
+                String busStop = parent.getItemAtPosition(pos).toString();
+                // TODO make sure this gets all the information it needs, not just the one spinner
+                // TODO What happens if there are no other times? Check.
+                Calendar calendar = GregorianCalendar.getInstance();
+                calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
+
+                int nextTime1 = allRoutes.get("U18MTF").getNextTime(busStop, currentTime);
+                int nextTime2 = allRoutes.get("U18MTF").getNextTime(busStop, nextTime1 + 1);
+                int nextTime3 = allRoutes.get("U18MTF").getNextTime(busStop, nextTime2 + 1);
+                
+                nextBus1.setText(timeToString(nextTime1));
+                nextBus2.setText(timeToString(nextTime2));
+                nextBus3.setText(timeToString(nextTime3));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Interface callback
+            }
+        });
+        
+        
 
         SharedPreferences settings = this.getActivity().getPreferences(0);
-        route.setSelection(settings.getInt("bus", 0));
+        routeSpinner.setSelection(settings.getInt("bus", 0));
 
         fillBusRoutes();
+        
+        
 
         return v;
 
@@ -45,7 +125,7 @@ public class BusesFragment extends Fragment {
         //
         // String t1 = timeToString(allRoutes.get("U18MTF").getNextTime(
         // "Youth Hostel South", getCurrentTime()));
-        // TextView nextTime1 = (TextView) v.findViewById(R.id.time1);
+        
         // nextTime1.setText(t1);
         // // how to access the next two times?
         //
@@ -113,6 +193,22 @@ public class BusesFragment extends Fragment {
     //
     // time.addView(busTimesRow);
     // }
+    
+    // Populates a spinner with the contents of the given array
+    private void setSpinnerContent(View view, Spinner spinner, int textArrayId) {
+
+        // Create an ArrayAdapter using the string array and a default spinner
+        // layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this.getActivity(), textArrayId,
+                android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+    }
 
     public void fillBusRoutes() {
         BusRoute myRoute = new BusRoute("U18", "MTF");
@@ -296,6 +392,7 @@ public class BusesFragment extends Fragment {
 
     public int getCurrentTime() {
         Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
         return calendar.get(Calendar.HOUR_OF_DAY) * 60
                 + calendar.get(Calendar.MINUTE);
     }

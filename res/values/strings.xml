@@ -45,18 +45,52 @@
     </string-array>
     
     <string-array name="bus_route_array">
-        <item>U10</item>
         <item>18</item>
         <item>U18</item>
         <item>X18</item>
+        <item>U10</item>
+        <item>10</item>
     </string-array>
-
-    <string-array name="u10_stops">
-        <item>Southdown</item>
+    
+    <string-array name="stops_18">
+        <item>University of Bath</item>
+        <item>Bus Station [dep]</item>
         <item>Oldfield Park</item>
-        <item>Bus Station</item>
-        <item>Bathwick Hill</item>
+        <item>Bus Station [ret]</item>
         <item>University</item>
+    </string-array>
+    
+    <string-array name="stops_U18">
+        <item>Lower Oldfield Park</item>
+        <item>Corn Street</item>
+        <item>High Street</item>
+        <item>Youth Hostel North</item>
+        <item>University of Bath</item>
+        <item>Youth Hostel South</item>
+        <item>North Parade</item>
+    </string-array>
+    
+    <string-array name="stops_X18">
+        <item>University of Bath</item>
+        <item>Bathwick Hill</item>
+        <item>Oldfield Park</item>
+    </string-array>
+    
+    <string-array name="stops_U10">
+        <item>University of Bath</item>
+        <item>Youth Hostel</item>
+        <item>Bathwich Terrace</item>
+        <item>Oldfield Park</item>
+        <item>Moorland road</item>
+        <item>Bathwich Terrace</item>
+    </string-array>
+   
+    <string-array name="stops_10">
+        <item>Bus Station</item>
+        <item>Kingsway Post Office [dep]</item>
+        <item>Southdown</item>
+        <item>Kingsway Post Office [ret]</item>
+        <item>Bus Station</item>
     </string-array>
 
     <string-array name="empty_array"></string-array>

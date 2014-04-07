@@ -39,11 +39,13 @@ public class BusRoute {
         currentTime = currentTime % 1440;
 
         ArrayList<Integer> stopTimes = stops.get(stopName);
-        Collections.sort(stopTimes);
-        for (int i = 0; i < stopTimes.size(); i++) {
-            int testTime = stopTimes.get(i);
-            if (testTime >= currentTime) {
-                return testTime;
+        if(stopTimes != null) {
+            Collections.sort(stopTimes);
+            for (int i = 0; i < stopTimes.size(); i++) {
+                int testTime = stopTimes.get(i);
+                if (testTime >= currentTime) {
+                    return testTime;
+                }
             }
         }
         return -1;
