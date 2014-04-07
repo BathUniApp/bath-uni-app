@@ -71,6 +71,13 @@ public class BusesFragment extends Fragment {
                             setSpinnerContent(view, stopSpinner,
                                     R.array.empty_array);
                         }
+                        
+                        ArrayList<String> busStops = allRoutes.get("U18MTF").getAllStops();
+                        
+                        for(int i = 0; i < busStops.size(); i++) {
+                            String stop = busStops.get(i);
+                            fillRow(stop, busTable, busTimes, allRoutes.get("U18MTF").getAllTimes(stop), i);
+                        }
 
                     }
 
@@ -118,27 +125,6 @@ public class BusesFragment extends Fragment {
         routeSpinner.setSelection(settings.getInt("bus", 0));
 
         fillBusRoutes();
-        
-        
-
-        
-        
-        // Example code for accessing all bus times for a stop. ***
-        // This seem to get ALL the times, not just the times from one
-        // bus stop *** unless the bus does come every 5 min, all day?
-//        ArrayList<Integer> returnedTimes = allRoutes.get("U18MTF").getAllTimes(
-//                "University of Bath");
-//        ArrayList<String> busTimesArray = new ArrayList<String>();
-//        for (Integer time : returnedTimes) {
-//            busTimesArray.add(timeToString(time));
-//        }
-        
-        ArrayList<String> busStops = allRoutes.get("U18MTF").getAllStops();
-        
-        for(int i = 0; i < busStops.size(); i++) {
-            String stop = busStops.get(i);
-            fillRow(stop, busTable, busTimes, allRoutes.get("U18MTF").getAllTimes(stop), i);
-        }
         
         return v;
 
