@@ -27,86 +27,92 @@ public class BusesFragment extends Fragment {
     private TextView nextBus2;
     private TextView nextBus3;
 
+    private TableLayout busTable;
+    private TableLayout busTimes;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_buses, container, false);
         routeSpinner = (Spinner) v.findViewById(R.id.route_spinner);
         stopSpinner = (Spinner) v.findViewById(R.id.busstop_spinner);
+
         nextBus1 = (TextView) v.findViewById(R.id.time1);
         nextBus2 = (TextView) v.findViewById(R.id.time2);
         nextBus3 = (TextView) v.findViewById(R.id.time3);
-        
+
+        busTable = (TableLayout) v.findViewById(R.id.times_table);
+        busTimes = (TableLayout) v.findViewById(R.id.times);
+
         routeSpinner
-        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent,
-                    View view, int pos, long id) {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent,
+                            View view, int pos, long id) {
 
-                // Update department spinner from appropriate array
-                if (parent.getItemAtPosition(pos).equals("U18")) {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.stops_U18);
-                } else if (parent.getItemAtPosition(pos).equals(
-                        "18")) {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.stops_18);
-                } else if (parent.getItemAtPosition(pos).equals(
-                        "X18")) {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.stops_X18);
-                } else if (parent.getItemAtPosition(pos).equals(
-                        "U10")) {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.stops_U10);
-                } else if (parent.getItemAtPosition(pos).equals(
-                        "10")) {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.stops_10);
-                } else {
-                    setSpinnerContent(view, stopSpinner,
-                            R.array.empty_array);
-                }
+                        // Update department spinner from appropriate array
+                        if (parent.getItemAtPosition(pos).equals("U18")) {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.stops_U18);
+                        } else if (parent.getItemAtPosition(pos).equals("18")) {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.stops_18);
+                        } else if (parent.getItemAtPosition(pos).equals("X18")) {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.stops_X18);
+                        } else if (parent.getItemAtPosition(pos).equals("U10")) {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.stops_U10);
+                        } else if (parent.getItemAtPosition(pos).equals("10")) {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.stops_10);
+                        } else {
+                            setSpinnerContent(view, stopSpinner,
+                                    R.array.empty_array);
+                        }
 
-            }
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Interface callback
-            }
-        });
-        
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Interface callback
+                    }
+                });
+
         stopSpinner
-        .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent,
-                    View view, int pos, long id) {
-                
-                int currentTime = getCurrentTime();
-                String busStop = parent.getItemAtPosition(pos).toString();
-                // TODO make sure this gets all the information it needs, not just the one spinner
-                // TODO What happens if there are no other times? Check.
-                Calendar calendar = GregorianCalendar.getInstance();
-                calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent,
+                            View view, int pos, long id) {
 
-                int nextTime1 = allRoutes.get("U18MTF").getNextTime(busStop, currentTime);
-                int nextTime2 = allRoutes.get("U18MTF").getNextTime(busStop, nextTime1 + 1);
-                int nextTime3 = allRoutes.get("U18MTF").getNextTime(busStop, nextTime2 + 1);
-                
-                nextBus1.setText(timeToString(nextTime1));
-                nextBus2.setText(timeToString(nextTime2));
-                nextBus3.setText(timeToString(nextTime3));
-            }
+                        int currentTime = getCurrentTime();
+                        String busStop = parent.getItemAtPosition(pos)
+                                .toString();
+                        // TODO make sure this gets all the information it
+                        // needs, not just the one spinner
+                        // TODO What happens if there are no other times? Check.
+                        Calendar calendar = GregorianCalendar.getInstance();
+                        calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Interface callback
-            }
-        });
-        
-        
+                        int nextTime1 = allRoutes.get("U18MTF").getNextTime(
+                                busStop, currentTime);
+                        int nextTime2 = allRoutes.get("U18MTF").getNextTime(
+                                busStop, nextTime1 + 1);
+                        int nextTime3 = allRoutes.get("U18MTF").getNextTime(
+                                busStop, nextTime2 + 1);
+
+                        nextBus1.setText(timeToString(nextTime1));
+                        nextBus2.setText(timeToString(nextTime2));
+                        nextBus3.setText(timeToString(nextTime3));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Interface callback
+                    }
+                });
 
         SharedPreferences settings = this.getActivity().getPreferences(0);
         routeSpinner.setSelection(settings.getInt("bus", 0));
@@ -115,84 +121,64 @@ public class BusesFragment extends Fragment {
         
         
 
-        return v;
-
-        // // Example code for accessing the next bus time
-        // // System.out.println(timeToString(getCurrentTime()));
-        // //
-        // System.out.println(timeToString(allRoutes.get("U18MTF").getNextTime("Youth Hostel South",
-        // // getCurrentTime())));
-        //
-        // String t1 = timeToString(allRoutes.get("U18MTF").getNextTime(
-        // "Youth Hostel South", getCurrentTime()));
         
-        // nextTime1.setText(t1);
-        // // how to access the next two times?
-        //
-        // // the array of all the times from a chosen busstop (or so it should
-        // be)
-        // ArrayList<String> busTimesArray = new ArrayList<String>();
-        //
-        // // Example code for accessing all bus times for a stop. ***
-        // // This seem to get ALL the times, not just the times from one
-        // // bus stop *** unless the bus does come every 5 min, all day?
-        // ArrayList<Integer> returnedTimes =
-        // allRoutes.get("U18MTF").getAllTimes(
-        // "University of Bath");
-        // for (Integer time : returnedTimes) {
-        // busTimesArray.add(timeToString(time));
-        // }
-        //
-        // // add rows to the bus times table:
-        // TableLayout table = (TableLayout) v.findViewById(R.id.times_table);
-        // TableLayout times = (TableLayout) v.findViewById(R.id.times);
-        //
-        // // how to add times to the timetable. The bus stops should
-        // // obviously come from whatever route is selected, rather than
-        // // being entered manually.
-        // fillRow("Random Name", table, times, busTimesArray, 0);
-        // fillRow("Second Stop", table, times, busTimesArray, 1);
-
-        //
+        
+        // Example code for accessing all bus times for a stop. ***
+        // This seem to get ALL the times, not just the times from one
+        // bus stop *** unless the bus does come every 5 min, all day?
+//        ArrayList<Integer> returnedTimes = allRoutes.get("U18MTF").getAllTimes(
+//                "University of Bath");
+//        ArrayList<String> busTimesArray = new ArrayList<String>();
+//        for (Integer time : returnedTimes) {
+//            busTimesArray.add(timeToString(time));
+//        }
+        
+        ArrayList<String> busStops = allRoutes.get("U18MTF").getAllStops();
+        
+        for(int i = 0; i < busStops.size(); i++) {
+            String stop = busStops.get(i);
+            fillRow(stop, busTable, busTimes, allRoutes.get("U18MTF").getAllTimes(stop), i);
+        }
+        
+        return v;
 
     }
 
-    // public void fillRow(String stopName, TableLayout table,
-    // TableLayout time, ArrayList<String> timesArray,
-    // int rowCounter) {
-    //
-    // TableRow busStopRow = new TableRow(this.getActivity());
-    // TableRow.LayoutParams busStopParams =
-    // new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-    // TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
-    // busStopRow.setLayoutParams(busStopParams);
-    //
-    // TableRow busTimesRow = new TableRow(this.getActivity());
-    // TableRow.LayoutParams busTimesParams =
-    // new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-    // TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
-    // busTimesRow.setLayoutParams(busTimesParams);
-    //
-    // TextView stop = new TextView(this.getActivity());
-    // stop.setText(stopName);
-    // stop.setPadding(10, 5, 10, 5);
-    // busStopRow.addView(stop);
-    // table.addView(busStopRow);
-    //
-    // if (rowCounter % 2 == 0) {
-    // busStopRow.setBackgroundResource(R.color.list_background);
-    // busTimesRow.setBackgroundResource(R.color.list_background);
-    // }
-    //
-    // for (String str : timesArray) {
-    // TextView times = new TextView(getActivity());
-    // times.setText(str);
-    // times.setPadding(10, 5, 10, 5);
-    // busTimesRow.addView(times);
-    // }
-    //
-    // time.addView(busTimesRow);
-    // }
+    public void fillRow(String stopName, TableLayout table, TableLayout time,
+            ArrayList<Integer> timesArray, int rowCounter) {
+
+        TableRow busStopRow = new TableRow(this.getActivity());
+        TableRow.LayoutParams busStopParams = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
+        busStopRow.setLayoutParams(busStopParams);
+
+        TableRow busTimesRow = new TableRow(this.getActivity());
+        TableRow.LayoutParams busTimesParams = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT, 2.0f);
+        busTimesRow.setLayoutParams(busTimesParams);
+
+        TextView stop = new TextView(this.getActivity());
+        stop.setText(stopName);
+        stop.setPadding(10, 5, 10, 5);
+        busStopRow.addView(stop);
+        table.addView(busStopRow);
+
+        if (rowCounter % 2 == 0) {
+            busStopRow.setBackgroundResource(R.color.list_background);
+            busTimesRow.setBackgroundResource(R.color.list_background);
+        }
+
+        for (int iTime : timesArray) {
+            TextView times = new TextView(getActivity());
+            times.setText(timeToString(iTime));
+            times.setPadding(10, 5, 10, 5);
+            busTimesRow.addView(times);
+        }
+
+        time.addView(busTimesRow);
+    }
     
     // Populates a spinner with the contents of the given array
     private void setSpinnerContent(View view, Spinner spinner, int textArrayId) {

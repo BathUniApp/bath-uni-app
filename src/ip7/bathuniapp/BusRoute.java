@@ -31,6 +31,11 @@ public class BusRoute {
     public ArrayList<Integer> getAllTimes(String stopName) {
         return stops.get(stopName);
     }
+    
+    // Returns an ArrayList of all the stops on a route
+    public ArrayList<String> getAllStops() {
+        return new ArrayList<String>(stops.keySet());
+    }
 
     // Returns the next bus time for the given stopName on this route.
     // If no next time is found, returns -1
