@@ -87,8 +87,8 @@ public class LecturesFragment extends Fragment {
                             builder.append(" ");
                         }
                         desc = builder.toString();
-                        if(desc.length() > 14) {
-                            desc = desc.substring(0, 13);
+                        if(desc.length() > 18) {
+                            desc = desc.substring(0, 17);
                         }
                     }
                     else if (line.equals("BEGIN:VEVENT")) {

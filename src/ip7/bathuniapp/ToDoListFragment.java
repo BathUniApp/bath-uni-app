@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,6 +62,9 @@ public class ToDoListFragment extends ListFragment implements OnClickListener {
             try {
                 task = datasource.createTask(title.getText().toString(), 0, desc.getText().toString(), 0, false,
                         new SimpleDateFormat("dd/MM/yyyy").parse(date.getText().toString() + "/2014"));
+                title.setText("");
+                desc.setText("");
+                date.setText("");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
