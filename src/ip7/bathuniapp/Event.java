@@ -2,6 +2,10 @@ package ip7.bathuniapp;
 
 import java.util.Date;
 
+/* 
+ *  Implements a simple set of getters and setters
+ *  for a single event.
+ */
 public class Event {
     private long id;
     private String title;

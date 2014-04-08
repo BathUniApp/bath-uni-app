@@ -9,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+
+/*
+ *  Adapt the information stored in the calendar to be displayed
+ *  in the ListView for the Lectures Fragment
+ */
+
 public class CalendarArrayAdapter<T> extends ArrayAdapter<T> {
     private final Context context;
     private final List<Event> events;
@@ -27,7 +33,7 @@ public class CalendarArrayAdapter<T> extends ArrayAdapter<T> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.cal_row, parent, false);
 
-        // Define how to add information to todo_row.xml
+        // Define how to add information to cal_row.xml
         TextView titleView = (TextView) rowView.findViewById(R.id.item_title);
         titleView.setText(events.get(position).getTitle());
 

@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
+/*
+ *  Maps Fragment simply displays a university map
+ *  using TouchImageView, allowing the user to scroll
+ *  and zoom around the map
+ */
 public class MapsFragment extends Fragment {
 
     @Override

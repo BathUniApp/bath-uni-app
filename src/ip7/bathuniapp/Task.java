@@ -2,6 +2,10 @@ package ip7.bathuniapp;
 
 import java.util.Date;
 
+/*
+ *  Simple getters and setters for a single task
+ *  in the user's to-do list
+ */
 public class Task {
     private long id;
     private String title;

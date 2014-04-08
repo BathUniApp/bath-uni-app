@@ -14,6 +14,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+/*
+ *  Aid in the communication between the SQL database of events,
+ *  and the user interface.
+ */
 public class CalendarDataSource {
 
     // Database fields
