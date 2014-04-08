@@ -9,8 +9,7 @@
          android:id="@+id/item_check" 
          android:layout_width="0dp" 
          android:layout_weight="1"
-         android:layout_height="match_parent"
-         android:onClick="onCheckboxClicked" />
+         android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/item_title"

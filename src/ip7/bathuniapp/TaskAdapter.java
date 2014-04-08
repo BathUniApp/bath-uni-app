@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
@@ -24,7 +26,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Inflate todo_row.xml
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,6 +40,15 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         dateView.setText(data.get(position).getDate().toString());
 
         CheckBox complete = (CheckBox) rowView.findViewById(R.id.item_check);
+        
+        complete.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                    boolean isChecked) {
+                data.get(position).setComplete(isChecked);
+            }
+        });
         complete.setChecked(data.get(position).getComplete());
 
         return rowView;

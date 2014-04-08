@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,7 +14,7 @@ import android.view.View;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.*;
 
@@ -29,6 +27,7 @@ public class LecturesFragment extends Fragment {
     
     String[][] events = new String[11][5];
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -33,7 +33,7 @@ public class BusesFragment extends Fragment {
 
     private String selectedRoute;
     private String selectedRouteType;
-    private String selectedStop;
+ //   private String selectedStop;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -168,7 +168,7 @@ public class BusesFragment extends Fragment {
                         
                         // TODO Move -this- to a seperate thing, have it get re-filled out.
                         
-                        selectedStop = parent.getItemAtPosition(pos).toString();
+                  //      selectedStop = parent.getItemAtPosition(pos).toString();
 
                         int currentTime = getCurrentTime();
                         String busStop = parent.getItemAtPosition(pos)
