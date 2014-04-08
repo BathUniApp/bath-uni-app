@@ -11,6 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+
+/*
+ *  Code behind the settings tab
+ *  Simply set up the spinboxes for use, and 
+ *  store whatever information is input in the
+ *  android device's settings.
+ */
 public class SettingsFragment extends Fragment {
 
     private Spinner facultySpinner;
@@ -85,6 +92,7 @@ public class SettingsFragment extends Fragment {
         return view;
     }
     
+    // Store the information when the tab is stopped
     @Override
     public void onStop() {
         super.onStop();

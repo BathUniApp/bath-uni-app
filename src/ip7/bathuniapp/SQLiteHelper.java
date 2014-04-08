@@ -5,6 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/*
+ *  Create a database, if one does not exist already, 
+ *  with tables and attributes equivalent to tasks
+ *  and events
+ */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_TASKS = "tasks";
