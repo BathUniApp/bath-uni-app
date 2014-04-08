@@ -40,12 +40,27 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
     <Button
         android:id="@+id/addTask"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="wrap_content"
         android:text="ADD TASK"
         android:onClick="onClick" />
+
+    <Button
+        android:id="@+id/removeTask"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="REMOVE SELECTED"
+        android:onClick="onClick" />
+    </LinearLayout>
 
     <ListView
         android:id="@android:id/list"
@@ -58,11 +73,6 @@
         android:layout_height="wrap_content"
         android:text="No tasks added yet." />
 
-    <Button
-        android:id="@+id/removeTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="REMOVE SELECTED"
-        android:onClick="onClick" />
+
 
 </LinearLayout>

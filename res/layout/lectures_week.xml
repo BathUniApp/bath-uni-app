@@ -17,8 +17,7 @@
 
             <TableLayout
                 a:id="@+id/lecture_times"
-                a:layout_width="0dp"
-                a:layout_weight="1"
+                a:layout_width="wrap_content"
                 a:layout_height="match_parent" >
             </TableLayout>
 
@@ -28,7 +27,7 @@
 
                 <TableLayout
                     a:id="@+id/lectures"
-                    a:layout_width="0dp"
+                    a:layout_width="match_parent"
                     a:layout_height="wrap_content" >
                 </TableLayout>
             </HorizontalScrollView>

@@ -139,7 +139,6 @@ public class LecturesFragment extends Fragment {
 
         fillRow(lecTimeTable, lecs, " ", datesArray, 1); // first row contains day names
 
-
         for(int i = 0; i < events.length; i++) {
             fillRow(lecTimeTable, lecs, timesArray[i], events[i], colourCounter);
             colourCounter++;
@@ -185,7 +184,7 @@ public class LecturesFragment extends Fragment {
             TextView lecture = new TextView(getActivity());
             setTextViewOptions(lecture, 3, Gravity.CENTER_HORIZONTAL,
                                10, 5, 10, 5, l);
-             lectureRow.addView(lecture);
+            lectureRow.addView(lecture);
         }
         lecs.addView(lectureRow);
 
