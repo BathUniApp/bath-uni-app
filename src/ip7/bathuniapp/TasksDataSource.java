@@ -13,6 +13,10 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+/*
+ *  Aid in the communication between the user's 
+ *  display and the database
+ */
 public class TasksDataSource {
 
     // Database fields

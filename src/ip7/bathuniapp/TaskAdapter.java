@@ -12,6 +12,11 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
+/*
+ *  Adapt the information stored in the database to be displayed
+ *  in the ListView for the To-Do Fragment
+ */
+
 public class TaskAdapter extends ArrayAdapter<Task> {
     private Context context;
     private int layoutResourceID;
@@ -41,6 +46,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         CheckBox complete = (CheckBox) rowView.findViewById(R.id.item_check);
         
+        // Set a listener to change the state of completion
+        // in the database when the user checks or un-checks a task
         complete.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override

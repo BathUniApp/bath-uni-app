@@ -5,7 +5,16 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
 
+/*
+ *  Stores stops and their associated times for a single bus route
+ *  The times are stored in the form hours * 60 + minutes, where
+ *  the hours are taken from midnight. So 13:23 would be stored as
+ *  13 * 60 + 23 = 803.
+ */
 public class BusRoute {
+    
+    // A map to link between a stop name and a list of times
+    // The bus stops at this point.
     private Map<String, ArrayList<Integer>> stops;
 
     public BusRoute(String name, String type) {
