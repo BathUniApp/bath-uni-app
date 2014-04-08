@@ -28,21 +28,21 @@ public class LecturesFragment extends Fragment {
     public void fillTimeTable(TableLayout lecTimeTable, TableLayout lecs) {
 
         // this is just a placeholder to test the table. Should
-        // obviously be replaced by whatever actually holds the lectre
-        // inf++ormation.
+        // obviously be replaced by whatever actually holds the lecture
+        // information.
         String[] placeholder = {"lecturelecture \n room \n weeks", "-tue-",
                                 "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
         String[] daysArray = {"Monday", "Tuesday", "Wednesday", "Thursday",
                               "Friday", "Saturday", "Sunday"};
         String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
-                               "13:15", "14:15", "15:15", "16:15", "17:15"};
+                               "13:15", "14:15", "15:15", "16:15", "17:15", "18:15"};
 
         int colourCounter = 0;// if even, colour row blue
 
         fillRow(lecTimeTable, lecs, " ", daysArray, 1); // first row contains day names
 
         // fill the row with placeholders for lectures. The table can
-        // comfortably hold three lines of information (lecure code,
+        // comfortably hold three lines of information (lecture code,
         // room code, weeks running)
         for (String time : timesArray) {
             fillRow(lecTimeTable, lecs, time, placeholder, colourCounter);
