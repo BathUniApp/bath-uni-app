@@ -19,12 +19,12 @@ import android.os.Bundle;
 import android.widget.*;
 
 public class LecturesFragment extends Fragment {
-    
+
     String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
             "13:15", "14:15", "15:15", "16:15", "17:15", "18:15"};
-         
+
     String[] datesArray = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-    
+
     String[][] events = new String[11][5];
 
     @SuppressLint("SimpleDateFormat")
@@ -37,35 +37,35 @@ public class LecturesFragment extends Fragment {
         TableLayout lectureTable = (TableLayout) v.findViewById(R.id.lecture_times);
         // table with the lectures for the given time and the week days
         TableLayout lectures     = (TableLayout) v.findViewById(R.id.lectures);
-        
-        
+
+
         try {
             InputStream inputStream = getResources().openRawResource(
                     getResources().getIdentifier("raw/test",
                     "raw", getActivity().getPackageName()));
-            
-            
-             
+
+
+
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader br = new BufferedReader(inputStreamReader);
-                
-                
+
+
                 String line;
                 Boolean inEvent = false;
                 for (int i = 0; i < timesArray.length; i++) {
                     String[] day = {"", "", "", "", ""};
                     events[i] = day;
                 }
-                
+
                 String location = "";
                 String course = "";
                 String desc = "";
                 int startDay = 0;
                 int startTime = 0;
-                    
-                
-                
+
+
+
                 while ((line = br.readLine()) != null) {
                     String splitString[] = line.split(":");
                     if ((splitString.length > 1) && (splitString[0].equals("LOCATION"))) {
@@ -87,8 +87,8 @@ public class LecturesFragment extends Fragment {
                             builder.append(" ");
                         }
                         desc = builder.toString();
-                        if(desc.length() > 14) {
-                            desc = desc.substring(0, 13);
+                        if(desc.length() > 18) {
+                            desc = desc.substring(0, 17);
                         }
                     }
                     else if (line.equals("BEGIN:VEVENT")) {
@@ -98,18 +98,18 @@ public class LecturesFragment extends Fragment {
                         desc = "";
                         startDay = 0;
                         startTime = 0;
-                    } 
+                    }
                     else if (line.equals("END:VEVENT")) {
                         inEvent = false;
                         events[startTime][startDay] = location + "\n" + course + "\n" + desc;
                     }
                 }
-                
-                
-                
-                
+
+
+
+
                 br.close();
-                
+
                 for(int i = 0; i < events.length; i++) {
                     System.out.println(timesArray[i]);
                     for (int j = 0; j < events[i].length; j++) {
@@ -118,7 +118,7 @@ public class LecturesFragment extends Fragment {
                     }
                 }
 
-                
+
             }
         }
         catch (FileNotFoundException e) {
@@ -135,34 +135,15 @@ public class LecturesFragment extends Fragment {
     }
 
     public void fillTimeTable(TableLayout lecTimeTable, TableLayout lecs) {
-
-        // this is just a placeholder to test the table. Should
-        // obviously be replaced by whatever actually holds the lecture
-        // information.
-//        String[] placeholder = {"lecturelecture \n room \n weeks", "-tue-",
-//                                "-wed-", "-thu-", "-fri-", "SAT", "SUN"};
-//        String[] daysArray = {"Monday", "Tuesday", "Wednesday", "Thursday",
-//                              "Friday", "Saturday", "Sunday"};
-//        String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
-//                               "13:15", "14:15", "15:15", "16:15", "17:15", "18:15"};
-
         int colourCounter = 0; // if even, colour row blue
 
         fillRow(lecTimeTable, lecs, " ", datesArray, 1); // first row contains day names
-        
-        
+
+
         for(int i = 0; i < events.length; i++) {
             fillRow(lecTimeTable, lecs, timesArray[i], events[i], colourCounter);
             colourCounter++;
         }
-
-        // fill the row with placeholders for lectures. The table can
-        // comfortably hold three lines of information (lecture code,
-        // room code, weeks running)
-//        for (String time : timesArray) {
-//            fillRow(lecTimeTable, lecs, time, placeholder, colourCounter);
-//            colourCounter++;
-//        }
     }
 
     public void fillRow(TableLayout lecTimeTable, TableLayout lecs,
