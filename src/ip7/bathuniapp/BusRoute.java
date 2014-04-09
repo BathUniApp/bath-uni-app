@@ -41,6 +41,22 @@ public class BusRoute {
         return stops.get(stopName);
     }
     
+    // Get an ArrayList of the next hour starting from the given time
+    public ArrayList<Integer> getTimesAt(String stopName, int startTime) {
+        ArrayList<Integer> stopTimes = stops.get(stopName);
+        ArrayList<Integer> returnTimes = new ArrayList<Integer>();
+        if(stopTimes != null) {
+            Collections.sort(stopTimes);
+            for (int i = 0; i < stopTimes.size(); i++) {
+                int testTime = stopTimes.get(i);
+                if ((testTime >= startTime) && (testTime <= ((startTime + 60) % 1440))) {
+                    returnTimes.add(testTime);
+                }
+            }
+        }
+        return returnTimes;
+    }
+    
     // Returns an ArrayList of all the stops on a route
     public ArrayList<String> getAllStops() {
         return new ArrayList<String>(stops.keySet());

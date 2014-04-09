@@ -102,8 +102,10 @@ public class SettingsFragment extends Fragment {
         editor.putString("username", usernameText.getText().toString());
         editor.putInt("faculty", facultySpinner.getSelectedItemPosition());
         editor.putInt("department", departmentSpinner.getSelectedItemPosition());
-        editor.putInt("course", yearSpinner.getSelectedItemPosition());
+        editor.putInt("year", yearSpinner.getSelectedItemPosition());
         editor.putInt("bus", busRouteSpinner.getSelectedItemPosition());
+        editor.putString("departmentName", departmentSpinner.getSelectedItem().toString());
+        editor.putString("yearName", yearSpinner.getSelectedItem().toString());
         
         //Commit edits
         editor.commit();  

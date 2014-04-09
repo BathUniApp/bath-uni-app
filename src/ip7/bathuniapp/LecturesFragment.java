@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,14 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.widget.*;
 
 public class LecturesFragment extends Fragment {
 
+    // Arrays to store dates, times and lecture information
     String[] timesArray = {"08:15", "09:15", "10:15", "11:15", "12:15",
             "13:15", "14:15", "15:15", "16:15", "17:15", "18:15"};
 
@@ -33,39 +37,45 @@ public class LecturesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.lectures_week, container, false);
 
-        // table with the lecture times column (rows, technically)
+        // Table with the lecture times column (rows, technically)
         TableLayout lectureTable = (TableLayout) v.findViewById(R.id.lecture_times);
-        // table with the lectures for the given time and the week days
+        // Table with the lectures for the given time and the week days
         TableLayout lectures     = (TableLayout) v.findViewById(R.id.lectures);
-
+        
+        // Get information from settings about which course the user is taking
+        String userCourse = "";
+        SharedPreferences settings = this.getActivity().getPreferences(0);
+        userCourse = userCourse + settings.getString("departmentName", "");
+        userCourse = userCourse + settings.getString("yearName", "");
+        userCourse = userCourse.replaceAll(" ", "");
+        userCourse = userCourse.toLowerCase();
+        
+        // Testing
+        System.out.println(userCourse);
 
         try {
             InputStream inputStream = getResources().openRawResource(
-                    getResources().getIdentifier("raw/test",
+                    getResources().getIdentifier("raw/" + userCourse,
                     "raw", getActivity().getPackageName()));
-
-
 
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader br = new BufferedReader(inputStreamReader);
 
-
+                // Initialise variables for events
                 String line;
                 Boolean inEvent = false;
                 for (int i = 0; i < timesArray.length; i++) {
                     String[] day = {"", "", "", "", ""};
                     events[i] = day;
                 }
-
                 String location = "";
                 String course = "";
                 String desc = "";
                 int startDay = 0;
                 int startTime = 0;
 
-
-
+                // Read and sort the information in the given ICS file
                 while ((line = br.readLine()) != null) {
                     String splitString[] = line.split(":");
                     if ((splitString.length > 1) && (splitString[0].equals("LOCATION"))) {
@@ -105,20 +115,7 @@ public class LecturesFragment extends Fragment {
                     }
                 }
 
-
-
-
                 br.close();
-
-                for(int i = 0; i < events.length; i++) {
-                    System.out.println(timesArray[i]);
-                    for (int j = 0; j < events[i].length; j++) {
-                        System.out.println(datesArray[j]);
-                        System.out.println(events[i][j]);
-                    }
-                }
-
-
             }
         }
         catch (FileNotFoundException e) {
@@ -127,13 +124,14 @@ public class LecturesFragment extends Fragment {
             e.printStackTrace();
         } catch (ParseException pe) {
             pe.printStackTrace();
+        } catch (NotFoundException nfe) {
         }
-
         fillTimeTable(lectureTable, lectures);
 
         return v;
     }
 
+    // Place the information given in the GUI timetable
     public void fillTimeTable(TableLayout lecTimeTable, TableLayout lecs) {
         int colourCounter = 0; // if even, colour row blue
 

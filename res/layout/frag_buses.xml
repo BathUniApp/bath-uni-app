@@ -51,7 +51,7 @@
         a:layout_marginTop="10dip"
         a:layout_marginBottom="10dip" />
 
-    <!-- next bus from chosen busstop -->
+    <!-- Next bus from chosen busstop -->
     <LinearLayout
         a:orientation="horizontal"
         a:layout_width="match_parent"
@@ -61,7 +61,7 @@
             a:layout_width="0dp"
             a:layout_weight="1"
             a:layout_height="wrap_content"
-            a:text="Next 3 buses from:" />
+            a:text="Bus Stop:" />
 
         <Spinner
             a:id="@+id/busstop_spinner"
@@ -71,11 +71,17 @@
 
     </LinearLayout>
 
-    <!-- next 3 buses from the busstop_spinner stop above -->
+    <!-- Next 3 buses from the busstop_spinner stop above -->
     <LinearLayout
         a:orientation="horizontal"
         a:layout_width="match_parent"
         a:layout_height="wrap_content" >
+        
+        <TextView
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:text="Next buses:" />
 
         <TextView
             a:id="@+id/time1"
@@ -106,6 +112,27 @@
         a:background="@color/blue"
         a:layout_marginTop="10dip"
         a:layout_marginBottom="10dip" />
+    
+    <!-- Display times from selected time -->
+    <LinearLayout
+        a:orientation="horizontal"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content" >
+
+        <TextView
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:text="Bus times from:" />
+
+        <Spinner
+            a:id="@+id/bustime_spinner"
+            a:layout_width="0dp"
+            a:layout_weight="1"
+            a:layout_height="wrap_content"
+            a:entries="@array/bus_times_array" />
+        
+    </LinearLayout>
 
     <LinearLayout
         a:orientation="horizontal"
