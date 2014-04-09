@@ -50,7 +50,11 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         dateView.setText(date);
 
         CheckBox complete = (CheckBox) rowView.findViewById(R.id.item_check);
-        
+
+        TextView descView = (TextView) rowView.findViewById(R.id.item_desc);
+        descView.setText(data.get(position).getDescription());
+
+
         // Set a listener to change the state of completion
         // in the database when the user checks or un-checks a task
         complete.setOnCheckedChangeListener(new OnCheckedChangeListener() {

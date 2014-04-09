@@ -12,7 +12,7 @@ import java.util.Collections;
  *  13 * 60 + 23 = 803.
  */
 public class BusRoute {
-    
+
     // A map to link between a stop name and a list of times
     // The bus stops at this point.
     private Map<String, ArrayList<Integer>> stops;
@@ -40,7 +40,7 @@ public class BusRoute {
     public ArrayList<Integer> getAllTimes(String stopName) {
         return stops.get(stopName);
     }
-    
+
     // Returns an ArrayList of all the stops on a route
     public ArrayList<String> getAllStops() {
         return new ArrayList<String>(stops.keySet());
