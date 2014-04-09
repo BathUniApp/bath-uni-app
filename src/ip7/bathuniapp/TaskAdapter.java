@@ -1,7 +1,9 @@
 package ip7.bathuniapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         this.data = data;
     }
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // Inflate todo_row.xml
@@ -42,7 +45,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         titleView.setText(data.get(position).getTitle());
 
         TextView dateView = (TextView) rowView.findViewById(R.id.item_date);
-        dateView.setText(data.get(position).getDate().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
+        String date = sdf.format(data.get(position).getDate());
+        dateView.setText(date);
 
         CheckBox complete = (CheckBox) rowView.findViewById(R.id.item_check);
         

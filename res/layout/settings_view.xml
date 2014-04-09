@@ -63,6 +63,34 @@
         android:background="@color/blue" />
 
     <TableRow
+        android:id="@+id/trBusRoute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip" >
+
+        <TextView
+            android:id="@+id/tvBusRoute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/bus_route"
+            android:textSize="24sp" />
+
+        <Spinner
+            android:id="@+id/spinBusRoute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </TableRow>
+    
+        
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="@color/blue" />
+
+    <TableRow
         android:id="@+id/trFaculty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,33 +151,6 @@
 
         <Spinner
             android:id="@+id/spinYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </TableRow>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:background="@color/blue" />
-
-    <TableRow
-        android:id="@+id/trBusRoute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dip" >
-
-        <TextView
-            android:id="@+id/tvBusRoute"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:text="@string/bus_route"
-            android:textSize="24sp" />
-
-        <Spinner
-            android:id="@+id/spinBusRoute"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
