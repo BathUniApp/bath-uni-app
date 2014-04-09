@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    xmlns:a="http://schemas.android.com/apk/res/android"
+    a:layout_width="match_parent"
+    a:layout_height="wrap_content"
+    a:orientation="vertical"
+    a:minHeight="50dp">
 
-     <CheckBox
-         android:id="@+id/item_check" 
-         android:layout_width="0dp" 
-         android:layout_weight="1"
-         android:layout_height="match_parent" />
+    <View
+        a:layout_width="match_parent"
+        a:layout_height="2dip"
+        a:background="@color/blue"
+        a:layout_marginTop="10dip"
+        a:layout_marginBottom="10dip" />
+
+    <LinearLayout
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:orientation="horizontal"
+        a:minHeight="30dp">
+
+        <CheckBox
+            a:id="@+id/item_check"
+            a:layout_width="wrap_content"
+            a:layout_height="match_parent"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
+            />
+
+        <TextView
+            a:id="@+id/item_date"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
+            />
+
+        <TextView
+            a:id="@+id/item_title"
+            a:layout_width="wrap_content"
+            a:layout_height="wrap_content"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
+            />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/item_title"
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/item_date"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        a:id="@+id/item_desc"
+        a:layout_width="match_parent"
+        a:layout_height="wrap_content"
+        a:paddingLeft="50dp" />
 
 </LinearLayout>
