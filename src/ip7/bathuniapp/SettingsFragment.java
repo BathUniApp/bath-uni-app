@@ -49,6 +49,7 @@ public class SettingsFragment extends Fragment {
 
         // Restore preferences
         SharedPreferences settings = this.getActivity().getPreferences(0);
+        final SharedPreferences.Editor editor = settings.edit();
         fullNameText.setText(settings.getString("name", ""));
         usernameText.setText(settings.getString("username", ""));
         facultySpinner.setSelection(settings.getInt("faculty", 0));
@@ -80,7 +81,58 @@ public class SettingsFragment extends Fragment {
                             setSpinnerContent(view, departmentSpinner,
                                     R.array.empty_array);
                         }
+                        
+                    }
 
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Interface callback
+                    }
+                });
+        
+        // Update settings when department changes
+        departmentSpinner
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent,
+                            View view, int pos, long id) {
+                        editor.putString("departmentName", parent.getItemAtPosition(pos).toString());
+                        editor.commit(); 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Interface callback
+                    }
+                });
+        
+        // Update settings when year changes
+        yearSpinner
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent,
+                            View view, int pos, long id) {
+                        editor.putString("yearName", parent.getItemAtPosition(pos).toString());
+                        editor.commit(); 
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        // Interface callback
+                    }
+                });
+        
+        // Update settings when bus changes
+        busRouteSpinner
+                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent,
+                            View view, int pos, long id) {
+                        editor.putInt("bus", pos);
+                        editor.commit(); 
                     }
 
                     @Override

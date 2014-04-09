@@ -125,6 +125,11 @@ public class LecturesFragment extends Fragment {
         } catch (ParseException pe) {
             pe.printStackTrace();
         } catch (NotFoundException nfe) {
+            // Clear the table if no course is found
+            for (int i = 0; i < timesArray.length; i++) {
+                String[] day = {"", "", "", "", ""};
+                events[i] = day;
+            }
         }
         fillTimeTable(lectureTable, lectures);
 
