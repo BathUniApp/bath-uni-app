@@ -40,7 +40,6 @@ public class BusRoute {
     public ArrayList<Integer> getAllTimes(String stopName) {
         return stops.get(stopName);
     }
-<<<<<<< HEAD
     
     // Get an ArrayList of the next hour starting from the given time
     public ArrayList<Integer> getTimesAt(String stopName, int startTime) {
@@ -57,10 +56,7 @@ public class BusRoute {
         }
         return returnTimes;
     }
-    
-=======
 
->>>>>>> FETCH_HEAD
     // Returns an ArrayList of all the stops on a route
     public ArrayList<String> getAllStops() {
         return new ArrayList<String>(stops.keySet());
