@@ -6,28 +6,42 @@
     a:orientation="vertical"
     a:minHeight="50dp">
 
+    <View
+        a:layout_width="match_parent"
+        a:layout_height="2dip"
+        a:background="@color/blue"
+        a:layout_marginTop="10dip"
+        a:layout_marginBottom="10dip" />
+
     <LinearLayout
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
         a:orientation="horizontal"
-        a:minHeight="50dp">
+        a:minHeight="30dp">
 
         <CheckBox
             a:id="@+id/item_check"
             a:layout_width="wrap_content"
             a:layout_height="match_parent"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
             />
 
         <TextView
             a:id="@+id/item_date"
             a:layout_width="wrap_content"
             a:layout_height="wrap_content"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
             />
 
         <TextView
             a:id="@+id/item_title"
             a:layout_width="wrap_content"
-            a:layout_height="wrap_content" />
+            a:layout_height="wrap_content"
+            a:paddingLeft="10dp"
+            a:paddingRight="10dp"
+            />
 
     </LinearLayout>
 
@@ -36,12 +50,5 @@
         a:layout_width="match_parent"
         a:layout_height="wrap_content"
         a:paddingLeft="50dp" />
-
-    <View
-        a:layout_width="match_parent"
-        a:layout_height="2dip"
-        a:background="@color/blue"
-        a:layout_marginTop="10dip"
-        a:layout_marginBottom="10dip" />
 
 </LinearLayout>
