@@ -64,7 +64,6 @@
         <item>Bus Station [dep]</item>
         <item>Oldfield Park</item>
         <item>Bus Station [ret]</item>
-        <item>University</item>
     </string-array>
     
     <string-array name="stops_U18">

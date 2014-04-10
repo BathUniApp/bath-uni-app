@@ -26,6 +26,8 @@ public class SettingsFragment extends Fragment {
     private Spinner busRouteSpinner;
     private EditText fullNameText;
     private EditText usernameText;
+    
+    private SharedPreferences settings;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -46,16 +48,10 @@ public class SettingsFragment extends Fragment {
         setSpinnerContent(view, facultySpinner, R.array.faculty_array);
         setSpinnerContent(view, yearSpinner, R.array.year_array);
         setSpinnerContent(view, busRouteSpinner, R.array.bus_route_array);
-
-        // Restore preferences
-        SharedPreferences settings = this.getActivity().getPreferences(0);
+        
+        // Get information from settings
+        settings = this.getActivity().getPreferences(0);
         final SharedPreferences.Editor editor = settings.edit();
-        fullNameText.setText(settings.getString("name", ""));
-        usernameText.setText(settings.getString("username", ""));
-        facultySpinner.setSelection(settings.getInt("faculty", 0));
-        departmentSpinner.setSelection(settings.getInt("department", 0));
-        yearSpinner.setSelection(settings.getInt("year", 0));
-        busRouteSpinner.setSelection(settings.getInt("bus", 0));
 
         // Update Department spinner when Faculty spinner changes
         facultySpinner
@@ -97,6 +93,7 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                             View view, int pos, long id) {
+                        editor.putInt("department", departmentSpinner.getSelectedItemPosition());
                         editor.putString("departmentName", parent.getItemAtPosition(pos).toString());
                         editor.commit(); 
                     }
@@ -114,6 +111,7 @@ public class SettingsFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                             View view, int pos, long id) {
+                        editor.putInt("year", yearSpinner.getSelectedItemPosition());
                         editor.putString("yearName", parent.getItemAtPosition(pos).toString());
                         editor.commit(); 
                     }
@@ -140,6 +138,14 @@ public class SettingsFragment extends Fragment {
                         // Interface callback
                     }
                 });
+        
+        // Restore preferences
+        fullNameText.setText(settings.getString("name", ""));
+        usernameText.setText(settings.getString("username", ""));
+        facultySpinner.setSelection(settings.getInt("faculty", 0));
+        departmentSpinner.setSelection(settings.getInt("department", 0));
+        yearSpinner.setSelection(settings.getInt("year", 0));
+        busRouteSpinner.setSelection(settings.getInt("bus", 0));
 
         return view;
     }
@@ -148,7 +154,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        SharedPreferences settings = this.getActivity().getPreferences(0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("name", fullNameText.getText().toString());
         editor.putString("username", usernameText.getText().toString());

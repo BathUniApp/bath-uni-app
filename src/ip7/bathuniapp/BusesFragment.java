@@ -64,6 +64,7 @@ public class BusesFragment extends Fragment {
 
         fillBusRoutes();
 
+        // Changes the times displayed depending upon the route selected
         routeSpinner
                 .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -95,26 +96,8 @@ public class BusesFragment extends Fragment {
                         selectedRoute = parent.getItemAtPosition(pos)
                                 .toString();
 
-                        BusRoute route = allRoutes.get(selectedRouteType
-                                + selectedRoute);
-                        busTable.removeAllViews();
-                        busTimes.removeAllViews();
-                        
-                        String timeString = timeSpinner.getSelectedItem().toString().split(":")[0];
-                        int time = 0;
-                        
-                        time = Integer.parseInt(timeString) * 60;
-
-                        if (route != null) {
-                            ArrayList<String> busStops = route.getAllStops();
-
-                            for (int i = 0; i < busStops.size(); i++) {
-                                String stop = busStops.get(i);
-                                fillRow(stop, busTable, busTimes, allRoutes
-                                        .get(selectedRouteType + selectedRoute)
-                                        .getTimesAt(stop, time), i);
-                            }
-                        }
+                        updateNextTimes();
+                        updateTimetable();
 
                     }
 
@@ -148,27 +131,9 @@ public class BusesFragment extends Fragment {
                         } else {
                             selectedRouteType = "MTF";
                         }
-
-                        BusRoute route = allRoutes.get(selectedRouteType
-                                + selectedRoute);
-                        busTable.removeAllViews();
-                        busTimes.removeAllViews();
                         
-                        String timeString = timeSpinner.getSelectedItem().toString().split(":")[0];
-                        int time = 0;
-                        
-                        time = Integer.parseInt(timeString) * 60;
-
-                        if (route != null) {
-                            ArrayList<String> busStops = route.getAllStops();
-
-                            for (int i = 0; i < busStops.size(); i++) {
-                                String stop = busStops.get(i);
-                                fillRow(stop, busTable, busTimes, allRoutes
-                                        .get(selectedRouteType + selectedRoute)
-                                        .getTimesAt(stop, time), i);
-                            }
-                        }
+                        updateNextTimes();
+                        updateTimetable();
                     }
 
                     @Override
@@ -184,34 +149,8 @@ public class BusesFragment extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> parent,
                             View view, int pos, long id) {
-                        
-                        // TODO Move -this- to a seperate thing, have it get re-filled out.
-                        
-                  //      selectedStop = parent.getItemAtPosition(pos).toString();
 
-                        int currentTime = getCurrentTime();
-                        String busStop = parent.getItemAtPosition(pos)
-                                .toString();
-                        // TODO If there are no other times, print something more graceful
-                        Calendar calendar = GregorianCalendar.getInstance();
-                        calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
-
-                        BusRoute route = allRoutes.get(selectedRouteType
-                                + selectedRoute);
-                        System.out.println(selectedRouteType + selectedRoute);
-
-                        if (route != null) {
-                            int nextTime1 = route.getNextTime(busStop,
-                                    currentTime);
-                            int nextTime2 = route.getNextTime(busStop,
-                                    nextTime1 + 1);
-                            int nextTime3 = route.getNextTime(busStop,
-                                    nextTime2 + 1);
-
-                            nextBus1.setText(timeToString(nextTime1));
-                            nextBus2.setText(timeToString(nextTime2));
-                            nextBus3.setText(timeToString(nextTime3));
-                        }
+                        updateNextTimes();
                     }
 
                     @Override
@@ -228,26 +167,7 @@ public class BusesFragment extends Fragment {
                     public void onItemSelected(AdapterView<?> parent,
                             View view, int pos, long id) {               
 
-                        BusRoute route = allRoutes.get(selectedRouteType
-                                + selectedRoute);
-                        busTable.removeAllViews();
-                        busTimes.removeAllViews();
-                        
-                        String timeString = timeSpinner.getSelectedItem().toString().split(":")[0];
-                        int time = 0;
-                        
-                        time = Integer.parseInt(timeString) * 60;
-
-                        if (route != null) {
-                            ArrayList<String> busStops = route.getAllStops();
-
-                            for (int i = 0; i < busStops.size(); i++) {
-                                String stop = busStops.get(i);
-                                fillRow(stop, busTable, busTimes, allRoutes
-                                        .get(selectedRouteType + selectedRoute)
-                                        .getTimesAt(stop, time), i);
-                            }
-                        }
+                        updateTimetable();
                     }
 
                     @Override
@@ -258,9 +178,62 @@ public class BusesFragment extends Fragment {
 
         SharedPreferences settings = this.getActivity().getPreferences(0);
         routeSpinner.setSelection(settings.getInt("bus", 0));
+        System.out.println(settings.getInt("bus", 0));
 
         return v;
 
+    }
+    
+    // Fills out the three textboxes displaying the three
+    // next times from the selected stop
+    public void updateNextTimes() {
+        int currentTime = getCurrentTime();
+        String busStop = stopSpinner.getSelectedItem()
+                .toString();
+
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("Etc/GMT-1"));
+
+        BusRoute route = allRoutes.get(selectedRouteType
+                + selectedRoute);
+
+        if (route != null) {
+            int nextTime1 = route.getNextTime(busStop,
+                    currentTime);
+            int nextTime2 = route.getNextTime(busStop,
+                    nextTime1 + 1);
+            int nextTime3 = route.getNextTime(busStop,
+                    nextTime2 + 1);
+
+            nextBus1.setText(timeToString(nextTime1));
+            nextBus2.setText(timeToString(nextTime2));
+            nextBus3.setText(timeToString(nextTime3));
+        }
+    }
+    
+    // Fills out the larger timetable, showing the 
+    // Next buses from the selected hour
+    public void updateTimetable() {
+        BusRoute route = allRoutes.get(selectedRouteType
+                + selectedRoute);
+        busTable.removeAllViews();
+        busTimes.removeAllViews();
+        
+        String timeString = timeSpinner.getSelectedItem().toString().split(":")[0];
+        int time = 0;
+        
+        time = Integer.parseInt(timeString) * 60;
+
+        if (route != null) {
+            ArrayList<String> busStops = route.getAllStops();
+
+            for (int i = 0; i < busStops.size(); i++) {
+                String stop = busStops.get(i);
+                fillRow(stop, busTable, busTimes, allRoutes
+                        .get(selectedRouteType + selectedRoute)
+                        .getTimesAt(stop, time), i);
+            }
+        }
     }
 
     public void fillRow(String stopName, TableLayout table, TableLayout time,
@@ -316,6 +289,37 @@ public class BusesFragment extends Fragment {
     }
 
     public void fillBusRoutes() {
+        
+        // 18 offsets
+        Map<String, Integer> first18offset = new HashMap<String, Integer>();
+        first18offset.put("Lower Oldfield Park", 0);
+        first18offset.put("Bus Station [ret]", 10);
+        first18offset.put("University of Bath", 30);
+        first18offset.put("Bus Station [dep]", 47);
+        
+        // Weekday 18
+        BusRoute first18mtf = new BusRoute("18", "MTF");
+        for (String stopName : first18offset.keySet()) {
+            int j = first18offset.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            for (int i = 0; i < 160; i++) {
+                times.add(409 + i * 5 + j);
+            }
+            first18mtf.addStop(stopName, times);
+        }
+        allRoutes.put("MTF18", first18mtf);
+        
+        // Weekend 18
+        BusRoute first18ss = new BusRoute("18", "SS");
+        for (String stopName : first18offset.keySet()) {
+            int j = first18offset.get(stopName);
+            ArrayList<Integer> times = new ArrayList<Integer>();
+            for (int i = 0; i < 57; i++) {
+                times.add(480 + i * 20 + j);
+            }
+            first18ss.addStop(stopName, times);
+        }
+        allRoutes.put("SS18", first18ss);
 
         // U18 offsets
         Map<String, Integer> u18offset = new HashMap<String, Integer>();
