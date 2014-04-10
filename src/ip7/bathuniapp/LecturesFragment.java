@@ -48,7 +48,7 @@ public class LecturesFragment extends Fragment {
         userCourse = userCourse + settings.getString("departmentName", "");
         userCourse = userCourse + settings.getString("yearName", "");
         userCourse = userCourse.replaceAll(" ", "");
-        userCourse = userCourse.toLowerCase();
+        userCourse = userCourse.toLowerCase(Locale.getDefault());
         
         // Testing
         System.out.println(userCourse);
